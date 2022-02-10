@@ -13,9 +13,15 @@ const theme = createTheme({
         error: {
             main: red.A400,
         },
+        divider: {
+            main: red.A400,
+        },
     },
     typography: {
         fontFamily: 'Roboto',
+    },
+    Image: {
+
     }
 });
 
@@ -27,6 +33,28 @@ theme.typography.h1 = {
     [theme.breakpoints.up('md')]: {
         fontSize: '3rem',
     },
+};
+theme.typography.h4 = {
+    fontSize: '1.2rem',
+    textTransform: 'Capitalize',
+    '@media (min-width:600px)': {
+        fontSize: '18px',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '18px',
+    },
+};
+theme.typography.h5 = {
+    fontSize: '25px',
+    textTransform: 'Capitalize',
+    color: '#353535',
+    fontWeight: '700',
+}
+theme.typography.span = {
+    fontSize: '14px',
+    color: '#353535',
+
+
 };
 
 export default theme;
