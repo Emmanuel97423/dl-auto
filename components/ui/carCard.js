@@ -11,9 +11,9 @@ import Button from '@mui/material/Button';
 function carCard(props) {
     return (
         <Box >
-            <Box className={styles.img} sx={{ display: 'flex', flexDirection: 'column', pb: '16px', pr: '16px', pl: '16px', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
+            <Box className={styles.img} sx={{ display: 'flex', flexDirection: 'column', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
 
-                <IconButton sx={{ alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
+                <IconButton sx={{ mb: '16px', alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
                     <FavoriteIcon sx={{ color: 'blue' }} />
                 </IconButton>
 
@@ -23,14 +23,13 @@ function carCard(props) {
 
                 />
                 <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
-                <Box>
-                    <Typography variant="span">2012</Typography>
+                <Box sx={{ p: '16px' }} >
+                    <Typography variant="span" >2012</Typography>
                     <Typography variant="h5" sx={{ mt: "-7px", mb: "-7px" }}>Volkswagen passat</Typography>
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
                         mb: '16px',
-
                     }}>
                         <Typography variant="span" sx={{ mr: '8px', p: '2px' }}>SEL</Typography>
                         <Divider orientation="vertical" variant="middle" flexItem sx={{ color: 'grey' }} />
@@ -38,8 +37,9 @@ function carCard(props) {
                     </Box>
                     <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
                     <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Typography sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>11 988 €</Typography>
-                        <Button variant="contained" sx={{ width: '70%', }}>Consulter</Button>
+
+                        <Typography className={styles.price} sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>11 988 €</Typography>
+                        <Button variant="contained" sx={{ width: '65%', }}>Consulter</Button>
                     </Box>
                 </Box>
             </Box>
