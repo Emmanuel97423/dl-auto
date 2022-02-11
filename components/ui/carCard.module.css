@@ -1,10 +1,16 @@
 .img{
     width:100%;
 }
+ 
 @media only screen and (min-width:640px) {
-    .img{
+    .img {
           width:33%;
         }
+    .bottom {
+      flex-direction: column;
+    }     
+ 
+    
 }
 @media only screen and (min-width:1024px) {
     .img{

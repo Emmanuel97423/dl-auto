@@ -14,7 +14,7 @@ function carCard(props) {
             <Box className={styles.img} sx={{ display: 'flex', flexDirection: 'column', pb: '16px', pr: '16px', pl: '16px', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
 
                 <IconButton sx={{ alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
-                    <FavoriteIcon />
+                    <FavoriteIcon sx={{ color: 'blue' }} />
                 </IconButton>
 
                 <Image
@@ -37,7 +37,7 @@ function carCard(props) {
                         <Typography variant="span" sx={{ ml: '8px', p: '2px' }}>50 000 km</Typography>
                     </Box>
                     <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
-                    <Box sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>11 988 €</Typography>
                         <Button variant="contained" sx={{ width: '70%', }}>Consulter</Button>
                     </Box>
