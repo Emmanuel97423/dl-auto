@@ -6,8 +6,8 @@
     }
  
 @media only screen and (min-width:640px) {
-    .img {
-          width:85%;
+    .box {
+          width:96%;
         }
     .bottom {
       flex-direction: column;
@@ -16,9 +16,6 @@
     
 }
 @media only screen and (min-width:1024px) {
-    .img{
-          width:85%;
-        }
      .bottom {
       flex-direction: row;
     }     

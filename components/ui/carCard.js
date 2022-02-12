@@ -12,7 +12,7 @@ function carCard(props) {
     console.log('props:', props.kilometrage)
     return (
         <Box >
-            <Box className={styles.img} sx={{ mb: '16px', display: 'flex', flexDirection: 'column', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
+            <Box className={styles.box} sx={{ mb: '16px', display: 'flex', flexDirection: 'column', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
 
                 <IconButton sx={{ mb: '16px', alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
                     <FavoriteIcon sx={{ color: 'blue' }} />
@@ -30,7 +30,7 @@ function carCard(props) {
                 <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
                 <Box sx={{ p: '16px' }} >
                     <Typography variant="span" >2012</Typography>
-                    <Typography variant="h5" sx={{ mt: "-7px", mb: "-7px" }}>{props.marque}</Typography>
+                    <Typography variant="h5" sx={{ mt: "-7px", mb: "-7px" }}>{props.marque} {props.model}</Typography>
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -47,8 +47,8 @@ function carCard(props) {
                         <Button variant="contained" sx={{ width: '65%', }}>Consulter</Button>
                     </Box>
                 </Box>
-            </Box >
-        </Box >
+            </Box>
+        </Box>
     )
 };
 
