@@ -5,7 +5,7 @@
 @media only screen and (min-width:640px) {
 .box{
     display:flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items:center;
     flex-direction: row;
     flex-wrap: wrap;
@@ -26,11 +26,9 @@
 
 @media only screen and (min-width:1440px) { 
 .container{
-    display:flex; 
+    display:flex;
+  
     padding: 0 0px;
 }    
-.searchMenu{
-    /* background-color: grey; */
-}
    
 }
