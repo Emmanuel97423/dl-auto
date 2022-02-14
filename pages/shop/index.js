@@ -43,7 +43,7 @@ function Shop({ data, children }) {
         //fetch data pagination
         // const stateDataPaginationResult = dataState;
 
-        const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
+        const res = await fetch(`${process.env.API_BASE_URL_PRODUCTION}/api/vehicules/`, {
             method: 'POST',
             body: currentPage,
 
@@ -163,7 +163,7 @@ export async function getServerSideProps() {
 
     // Fetch data from external API
 
-    const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
+    const res = await fetch(`${process.env.API_BASE_URL_PRODUCTION}/api/vehicules/`, {
         method: 'POST',
     })
     const data = await res.json()
