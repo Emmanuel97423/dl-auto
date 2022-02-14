@@ -8,7 +8,7 @@ export default function handler(req, res) {
         fetch(`https://services.mobile.de/search-api/search?${searchParams}`, {
             method: 'GET',
             headers: new Headers({
-                'Authorization': 'Basic ' + Buffer.from('DL_Automobile_Trade:Dlautomobile974!').toString('base64'),
+                'Authorization': 'Basic ' + Buffer.from(`${process.env.MOBILEDE_USER + ':' + process.env.MOBILEDE_PASSWORD}`).toString('base64'),
                 'Content-Type': 'application/xml',
                 'Accept-Encoding': 'gzip',
                 'Accept-Language': 'fr',
@@ -28,7 +28,7 @@ export default function handler(req, res) {
         fetch(`https://services.mobile.de/search-api/search?${searchParams}`, {
             method: 'GET',
             headers: new Headers({
-                'Authorization': 'Basic ' + Buffer.from('DL_Automobile_Trade:Dlautomobile974!').toString('base64'),
+                'Authorization': 'Basic ' + Buffer.from(`${process.env.MOBILEDE_USER + ':' + process.env.MOBILEDE_PASSWORD}`).toString('base64'),
                 'Content-Type': 'application/xml',
                 'Accept-Encoding': 'gzip',
                 'Accept-Language': 'fr',

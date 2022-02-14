@@ -11,7 +11,7 @@ function paginationApp(props) {
         if (value) {
             props.setPage(value);
             props.childToParent(props.page);
-            // window.scrollTo(0, 0);
+            window.scrollTo(0, 0);
         } else if (arrowNav === 'NavigateNextIcon') {
             props.setPage(value)
         } else if (arrowNav === 'NavigateBeforeIcon') {

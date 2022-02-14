@@ -41,7 +41,7 @@ function Shop({ data, children }) {
     //pagination component listener
     const paginationChange = async (currentPage) => {
         //fetch data pagination
-        const stateDataPaginationResult = dataState;
+        // const stateDataPaginationResult = dataState;
 
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
             method: 'POST',
