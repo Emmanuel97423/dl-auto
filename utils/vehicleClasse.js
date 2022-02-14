@@ -1,3 +1,5 @@
+import noImagePlaceHolder from '../public/no-image.jpg'
+
 export class Vehicle {
     constructor(data) {
 
@@ -41,7 +43,7 @@ export class Vehicle {
 
     get price() { return this._price };
 
-    get image() { return this._image ? this._image : "https://i.ebayimg.com/00/s/NzUwWDk5OQ==/z/FncAAOSwmmxW2V67/$_1.JPG" };
+    get image() { return this._image ? this._image : noImagePlaceHolder };
     set image(image) { return this._image = image }
 
     get carburant() { return this._carburant };
