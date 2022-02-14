@@ -4,11 +4,14 @@
 .price {
       font-size:18px;
     }
+.button {
+  width:56%;
+}
  
 @media only screen and (min-width:640px) {
-    .box {
-          width:96%;
-        }
+          .box {
+          width:93%;
+        }  
     .bottom {
       flex-direction: column;
     }     
@@ -16,12 +19,19 @@
     
 }
 @media only screen and (min-width:1024px) {
+      .box {
+          width:96%;
+        }
      .bottom {
       flex-direction: row;
     }     
     .price {
       font-size:15px;
     }
+    .button {
+        width:55%;
+    }
+ 
 } 
    
  

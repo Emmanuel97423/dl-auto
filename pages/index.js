@@ -16,7 +16,15 @@ export default function Home() {
         <Typography variant="h1" component="h1" gutterBottom>
           Dl Automobile
         </Typography>
-        <Link href="/shop" color="secondary">
+        <Link
+          href={{
+            pathname: '/shop',
+            // query: {
+            //   modele: 'FORD',
+            //   page: 1
+            // },
+          }}
+          color="secondary">
           Go to the shop page
         </Link>
         <ProTip />

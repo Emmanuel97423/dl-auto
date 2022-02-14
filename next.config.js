@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ['i.ebayimg.com'],
   },
+  env: {
+    API_BASE_URL: process.env.API_BASE_URL,
+  }
 }
