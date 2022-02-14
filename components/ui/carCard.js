@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 
 function carCard(props) {
-    console.log('props:', props.kilometrage)
+    // console.log('props:', props.kilometrage)
     return (
         <Box >
             <Box className={styles.box} sx={{ mb: '16px', display: 'flex', flexDirection: 'column', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
@@ -44,7 +44,7 @@ function carCard(props) {
                     <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
                         <Typography className={styles.price} sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>{props.price} €</Typography>
-                        <Button variant="contained" sx={{ width: '65%', }}>Consulter</Button>
+                        <Button className={styles.button} variant="contained" >Consulter</Button>
                     </Box>
                 </Box>
             </Box>

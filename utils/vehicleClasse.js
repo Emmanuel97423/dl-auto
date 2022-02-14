@@ -1,6 +1,6 @@
 export class Vehicle {
     constructor(data) {
-        console.log('data:', data)
+
 
         this._data = data;
         this._id = data._attributes.key;
