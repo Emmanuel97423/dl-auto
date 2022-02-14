@@ -22,12 +22,18 @@ function Shop({ data, children }) {
     const [page, setPage] = useState(1);
     const [dataState, setDataState] = useState([]);
     // const [dataServerSideState, setDataServerSideState] = useState([]);
-    const [vehicleTotal, setVehicleTotal] = useState(0);
+    const [vehicleTotalState, setVehicleTotalState] = useState(null);
+
 
 
 
     const searchResult = data["search:search-result"]["search:ads"]["ad:ad"];
-    console.log('searchResult:', searchResult)
+    const vehicleTotal = data["search:search-result"]["search:total"]._text
+    console.log('vehicleTotal:', vehicleTotal)
+    // console.log('data:', data)
+    // setVehicleTotal(data);
+    // console.log('vehicleTotal:', vehicleTotal)
+
     const totalPages = data["search:search-result"]["search:max-pages"]._text;
     const totalPagesInt = parseInt(totalPages)
 
@@ -135,7 +141,7 @@ function Shop({ data, children }) {
             <SearchBar />
         </Box>
         <Box>
-            <Typography sx={{ mt: '10px', mb: '10px' }}>26 000 voitures d'occasion trouvés</Typography>
+            <Typography sx={{ mt: '10px', mb: '10px' }}>{vehicleTotal} voitures d'occasion trouvés</Typography>
             <TemplateState />
             <PaginationApp
                 page={page}
