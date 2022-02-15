@@ -17,14 +17,9 @@ import { useState, useEffect } from "react";
 function carCard(props) {
     const [routerState, setRouterState] = useState('start');
 
-
-    useEffect(() => {
-        setTimeout(() => {
-            setRouterState('finish')
-        }, 1000)
-        console.log('props:', props.kilometrage)
-        console.log('routerState:', routerState)
-    })
+    setTimeout(() => {
+        setRouterState('finish')
+    }, 2000)
 
 
     if (routerState === 'finish') {
@@ -34,19 +29,22 @@ function carCard(props) {
                 <FavoriteIcon sx={{ color: 'blue' }} />
             </IconButton>
 
-            <Image
-                className={styles.image}
-                src={props.img}
-                alt="Picture of the author"
-                width={500}
-                height={400}
-                layout="responsive"
-                placeholder="blur"
-                blurDataURL={props.img}
+            <div>
+                <Image
+                    className={styles.image}
+                    src={props.img}
+                    alt="Picture of the author"
+                    width={500}
+                    height={400}
+                    layout="responsive"
+                    placeholder="blur"
+                    blurDataURL={props.img}
+                    priority={true}
 
 
 
-            />
+                />
+            </div>
             <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
             <Box sx={{ p: '16px' }} >
                 <Typography variant="span" >2012</Typography>

@@ -8,7 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import SearchBar from '../../components/search/searchBar'
 import { Vehicle } from '../../utils/vehicleClasse.js';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Router from 'next/router';
 
 
@@ -24,31 +24,13 @@ function Shop({ data, children }) {
     const [dataState, setDataState] = useState([]);
     // const [dataServerSideState, setDataServerSideState] = useState([]);
     const [vehicleTotalState, setVehicleTotalState] = useState(null);
-    const [routerState, setRouterState] = useState([])
-
-
-    Router.onRouteChangeStart = () => {
-        setRouterState('start');
-        console.log('routerState:', routerState)
-
-
-    };
-    Router.onRouteChangeComplete = () => {
-        setRouterState('finish');
-        console.log('routerState:', routerState)
-
-    };
-    Router.onRouteChangeError = () => {
-        console.log('onRouteChangeError triggered');
-
-    };
 
 
 
 
     const searchResult = data["search:search-result"]["search:ads"]["ad:ad"];
     const vehicleTotal = data["search:search-result"]["search:total"]._text
-    console.log('vehicleTotal:', vehicleTotal)
+
     // console.log('data:', data)
     // setVehicleTotal(data);
     // console.log('vehicleTotal:', vehicleTotal)
@@ -61,6 +43,7 @@ function Shop({ data, children }) {
     const paginationChange = async (currentPage) => {
         //fetch data pagination
         // const stateDataPaginationResult = dataState;
+        setDataState([]);
 
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
             method: 'POST',
@@ -182,7 +165,7 @@ function Shop({ data, children }) {
 
 
 // This gets called on every request
-export async function getServerSideProps() {
+export async function getStaticProps(context) {
 
     // Fetch data from external API
 
