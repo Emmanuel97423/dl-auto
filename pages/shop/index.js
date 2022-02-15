@@ -9,7 +9,8 @@ import Stack from '@mui/material/Stack';
 import SearchBar from '../../components/search/searchBar'
 import { Vehicle } from '../../utils/vehicleClasse.js';
 import { useState } from "react";
-import { useRouter } from 'next/router';
+import Router from 'next/router';
+
 
 import PaginationApp from '../../components/ui/pagination';
 
@@ -23,6 +24,24 @@ function Shop({ data, children }) {
     const [dataState, setDataState] = useState([]);
     // const [dataServerSideState, setDataServerSideState] = useState([]);
     const [vehicleTotalState, setVehicleTotalState] = useState(null);
+    const [routerState, setRouterState] = useState([])
+
+
+    Router.onRouteChangeStart = () => {
+        setRouterState('start');
+        console.log('routerState:', routerState)
+
+
+    };
+    Router.onRouteChangeComplete = () => {
+        setRouterState('finish');
+        console.log('routerState:', routerState)
+
+    };
+    Router.onRouteChangeError = () => {
+        console.log('onRouteChangeError triggered');
+
+    };
 
 
 
@@ -56,44 +75,46 @@ function Shop({ data, children }) {
         // Pass data to the page via props
         // return { props: dataState }
     };
-    //Template ui
+    //Template ui condition
     function TemplateState() {
         if (dataState.length > 0) {
-            return (<Box className={styles.box}>
-                {
+            return (
 
-                    dataState.map((vehicules, index) => {
-                        const vehicle = { ...vehicules }
-                        const vehicleClasse = new Vehicle(vehicle);
-                        const id = vehicleClasse.id;
-                        const marque = vehicleClasse.brand;
-                        const model = vehicleClasse.model;
-                        const price = vehicleClasse.price;
-                        const kilometrage = vehicleClasse.kilometrage;
-                        const carburant = vehicleClasse.carburant;
-                        const img = vehicleClasse.image;
+                <Box className={styles.box}>
+                    {
 
-
-
-                        return (<div className={styles.cards} key={index}>
-                            <CarCard
-                                id={id}
-                                marque={marque}
-                                model={model}
-                                price={price}
-                                kilometrage={kilometrage}
-                                carburant={carburant}
-                                img={img}
-
-                            >
-                            </CarCard>
-                            {children}
-                        </div>)
+                        dataState.map((vehicules, index) => {
+                            const vehicle = { ...vehicules }
+                            const vehicleClasse = new Vehicle(vehicle);
+                            const id = vehicleClasse.id;
+                            const marque = vehicleClasse.brand;
+                            const model = vehicleClasse.model;
+                            const price = vehicleClasse.price;
+                            const kilometrage = vehicleClasse.kilometrage;
+                            const carburant = vehicleClasse.carburant;
+                            const img = vehicleClasse.image;
 
 
-                    })
-                }
-            </Box>)
+
+                            return (<div className={styles.cards} key={index}>
+                                <CarCard
+                                    id={id}
+                                    marque={marque}
+                                    model={model}
+                                    price={price}
+                                    kilometrage={kilometrage}
+                                    carburant={carburant}
+                                    img={img}
+
+                                >
+                                </CarCard>
+                                {children}
+                            </div>)
+
+
+                        })
+                    }
+                </Box>)
         } else {
             return (
                 <Box className={styles.box}>
@@ -139,9 +160,11 @@ function Shop({ data, children }) {
     return (<Container className={styles.container} maxWidth="l">
         <Box className={styles.searchMenu}>
             <SearchBar />
+
         </Box>
         <Box>
             <Typography sx={{ mt: '10px', mb: '10px' }}>{vehicleTotal} voitures d'occasion trouvés</Typography>
+
             <TemplateState />
             <PaginationApp
                 page={page}
