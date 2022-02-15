@@ -19,7 +19,7 @@ function carCard(props) {
 
     setTimeout(() => {
         setRouterState('finish')
-    }, 2000)
+    }, 3000)
 
 
     if (routerState === 'finish') {
