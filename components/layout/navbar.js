@@ -18,7 +18,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ width: 1, p: 2, boxShadow: 3 }}>
-            <Link href="./shop">
+            <Link href="/shop">
                 <Button
                     id="basic-button"
                     aria-controls={open ? 'basic-menu' : undefined}

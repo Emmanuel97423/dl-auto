@@ -53,8 +53,10 @@ theme.typography.h5 = {
 theme.typography.span = {
     fontSize: '14px',
     color: '#353535',
-
-
 };
+theme.typography.link = {
+    fontSize: '14px',
+    color: '#19857b',
+}
 
 export default theme;

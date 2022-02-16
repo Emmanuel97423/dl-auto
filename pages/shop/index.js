@@ -43,7 +43,7 @@ function Shop({ data, children }) {
     const paginationChange = async (currentPage) => {
         //fetch data pagination
         // const stateDataPaginationResult = dataState;
-        setDataState([]);
+        // setDataState([]);
 
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
             method: 'POST',
@@ -165,7 +165,7 @@ function Shop({ data, children }) {
 
 
 // This gets called on every request
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
 
     // Fetch data from external API
 
