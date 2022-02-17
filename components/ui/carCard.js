@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Image from 'next/image';
-import imageTest from '../../public/carTest.jpg';
+import Link from 'next/link'
 import styles from './carCard.module.css';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 
 
 function carCard(props) {
+
     const [routerState, setRouterState] = useState('start');
 
     setTimeout(() => {
@@ -62,7 +63,9 @@ function carCard(props) {
                 <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
                     <Typography className={styles.price} sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>{props.price} €</Typography>
-                    <Button className={styles.button} variant="contained" >Consulter</Button>
+                    <Link href={`/shop/vehicle/${props.id}`}>
+                        <Button className={styles.button} variant="contained" >Consulter</Button>
+                    </Link>
                 </Box>
             </Box>
         </Box>)
