@@ -34,6 +34,9 @@ theme.typography.h1 = {
         fontSize: '3rem',
     },
 };
+theme.typography.h2 = {
+    fontSize: '32px',
+};
 theme.typography.h4 = {
     fontSize: '1.2rem',
     textTransform: 'Capitalize',
@@ -49,14 +52,30 @@ theme.typography.h5 = {
     textTransform: 'Capitalize',
     color: '#353535',
     fontWeight: '700',
-}
+};
+theme.typography.h6 = {
+    fontSize: '25px',
+    textTransform: 'Capitalize',
+    color: '#353535',
+    fontWeight: '700',
+};
 theme.typography.span = {
     fontSize: '14px',
     color: '#353535',
 };
-theme.typography.link = {
+theme.typography.spanGrey = {
     fontSize: '14px',
-    color: '#19857b',
+    color: '#707070',
+};
+theme.typography.spanBold = {
+    fontSize: '18px',
+    color: '#353535',
+    fontWeight: '700',
+};
+theme.typography.link = {
+    fontSize: '16px',
+    color: '#556cd6',
+    fontWeight: '700'
 }
 
 export default theme;
