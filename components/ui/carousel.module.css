@@ -1,0 +1,26 @@
+.carousel {
+    display:flex;   
+    flex-direction: column;
+    
+}
+.thumb {
+   display: flex;
+   flex-wrap: nowrap;
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch;
+   -ms-overflow-style: -ms-autohiding-scrollbar; 
+   padding: 0 0 15px 0;
+     
+     
+}
+.thumb__img {
+    /* width:88px; */
+    /* height:68px; */
+    /* display:block; */
+    padding: 3px 2px;
+   
+}
+.thumb__img:nth-child(1){
+    border: 1px solid #3540a1;
+    /* background-color:red; */
+}
