@@ -1,12 +1,12 @@
 export class Car {
     constructor(data) {
-        // console.log('data:', data)
+        console.log('data:', data)
         this._data = data;
         this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
-        this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text;
+        this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]
         this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
-        this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"]._attributes.value;
+        this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"];
         this._priceHt = data["ad:ad"]["ad:price"]["ad:consumer-price-amount"]._attributes.value;
 
 
@@ -23,11 +23,35 @@ export class Car {
 
     get getCar() { return this.car }
 
-    get images() { return this.carImages() };
+    get images() {
+        if (this._data["ad:ad"]["ad:images"] === undefined) {
+            return null;
+        } else {
+            return this.carImages()
+        }
+        return this.carImages()
+    };
     get brand() { return this._brand };
-    get model() { return this._model };
+
+    get model() {
+        if (this._model === undefined) {
+            return null;
+        } else {
+            return this._data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text
+        }
+        // return this._data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"] ? data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text : null 
+    };
+    // set model(model) { this._model = model };
+
     get fuel() { return this._fuel };
-    get kilometrage() { return this._kilometrage };
+    get kilometrage() {
+        if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"] === undefined) {
+            return null;
+        } else {
+            return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"]._attributes.value
+        }
+        return this._kilometrage
+    };
     get priceHt() { return this.carPriceHt() }
 
     filter() {
@@ -37,14 +61,14 @@ export class Car {
     }
     carImages() {
         return this._arrImage.map(images => {
-            // console.log('images:', images["ad:representation"][6]._attributes.url)
+
             return images["ad:representation"][6]._attributes.url;
         })
     };
     carPriceHt() {
 
         function numberWithSpaces(x) {
-            console.log('x:', typeof (x))
+
             // x.toFixed(0)
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
