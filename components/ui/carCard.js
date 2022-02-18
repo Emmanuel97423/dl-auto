@@ -18,9 +18,17 @@ function carCard(props) {
 
     const [routerState, setRouterState] = useState('start');
 
+    // useEffect(() => {
+    //     cleanCache()
+    //     return (() => {
+    //         setRouterState({})
+    //     })
+    // })
+
     setTimeout(() => {
         setRouterState('finish')
     }, 2000)
+
 
 
     if (routerState === 'finish') {
@@ -70,7 +78,9 @@ function carCard(props) {
             </Box>
         </Box>)
     } else {
-        return (<LoadingSkeleton />)
+        return (<LoadingSkeleton
+            props={props}
+        />)
     }
 };
 
