@@ -42,7 +42,7 @@ export class VehicleFactory {
     get kilometrage() { return this._kilometrage ? this._kilometrage : null };
     set kilometrage(kilometrage) { return this._kilometrage = kilometrage };
 
-    get price() { return this._price };
+    get price() { return this.numberWithSpaces(parseInt(this._price).toFixed(0)) };
 
     get image() { return this._image ? this._image : noImagePlaceHolder };
     set image(image) { return this._image = image }
@@ -77,5 +77,10 @@ export class VehicleFactory {
     searchVehicle() {
         const vehicle = new Vehicle(this._data);
         // vehicle.
+    };
+    numberWithSpaces(x) {
+
+        // x.toFixed(0)
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 }
