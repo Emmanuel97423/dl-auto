@@ -65,7 +65,7 @@ function carousel(props) {
                     className={styles.large__img}
                     src={noImagePlaceHolder}
                     alt="Picture of the author"
-                    width={500}
+                    width={200}
                     height={330}
                     layout="responsive"
                     objectFit='cover'

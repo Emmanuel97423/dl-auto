@@ -5,7 +5,7 @@ export class Car {
         // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
         this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]
-        this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
+        // this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
         this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"];
         this._priceHt = data["ad:ad"]["ad:price"]["ad:consumer-price-amount"]._attributes.value;
 
@@ -43,7 +43,13 @@ export class Car {
     };
     // set model(model) { this._model = model };
 
-    get fuel() { return this._fuel };
+    get fuel() {
+        if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] === undefined) {
+            return null;
+        } else {
+            return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text
+        }
+    };
     get kilometrage() {
         if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"] === undefined) {
             return null;

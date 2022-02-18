@@ -27,7 +27,7 @@ function carCard(props) {
 
     setTimeout(() => {
         setRouterState('finish')
-    }, 2000)
+    }, 3000)
 
 
 
@@ -70,7 +70,15 @@ function carCard(props) {
                 <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
                 <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-                    <Typography className={styles.price} sx={{ color: '#353535', fontSize: '18px', fontWeight: '700' }}>{props.price} €</Typography>
+                    <Typography className={styles.price} sx={{
+                        color: '#353535',
+                        fontSize: '18px',
+                        fontWeight: '700',
+                        '@media (min-width:1024px)': {
+                            fontSize: '19px',
+                        }
+
+                    }}>{props.price} €</Typography>
                     <Link href={`/shop/vehicle/${props.id}`}>
                         <Button className={styles.button} variant="contained" >Consulter</Button>
                     </Link>

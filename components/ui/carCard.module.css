@@ -1,9 +1,9 @@
 .img{
     width:100%;
 }
-.price {
+/* .price {
       font-size:18px;
-    }
+    } */
 .button {
   width:56%;
 }
@@ -30,9 +30,7 @@
      .bottom {
       flex-direction: row;
     }     
-    .price {
-      font-size:15px;
-    }
+
     .button {
         width:55%;
     }
