@@ -1,10 +1,12 @@
-import noImagePlaceHolder from '../public/no-image.jpg'
+import noImagePlaceHolder from '../../public/no-image.jpg'
+import Vehicle from './Car.js'
 
-export class Vehicle {
+export class VehicleFactory {
     constructor(data) {
 
 
         this._data = data;
+        // this._request = request;
         this._id = data._attributes.key;
         this._brand = data["ad:vehicle"]["ad:make"]["resource:local-description"]._text;
 
@@ -24,13 +26,12 @@ export class Vehicle {
             this._image = data["ad:images"]["ad:image"]["ad:representation"][1]._attributes.url;
         }
 
-
-
-
-
     }
     get data() { return this._data };
     set data(data) { this._data = data };
+
+    get request() { return this._request }
+    set request(request) { this._request = request }
 
     get id() { return this._id };
     get brand() { return this._brand };
@@ -49,10 +50,10 @@ export class Vehicle {
     get carburant() { return this._carburant };
     set carburant(carburant) { return this._carburant = carburant };
 
-
     get getConvert() {
         return this.convert()
-    }
+    };
+    get getVehicle() { return this.searchVehicle() }
 
     convert() {
         let obj = [];
@@ -71,5 +72,10 @@ export class Vehicle {
 
                 ;
         }
+    };
+
+    searchVehicle() {
+        const vehicle = new Vehicle(this._data);
+        // vehicle.
     }
 }
