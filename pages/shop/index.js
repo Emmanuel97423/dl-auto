@@ -7,7 +7,7 @@ import styles from './shop.module.css';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import SearchBar from '../../components/search/searchBar'
-import { Vehicle } from '../../utils/vehicleClasse.js';
+import { VehicleFactory } from '../../utils/classes/Vehicles';
 import { useState, useEffect } from "react";
 import Router from 'next/router';
 
@@ -68,7 +68,7 @@ function Shop({ data, children }) {
 
                         dataState.map((vehicules, index) => {
                             const vehicle = { ...vehicules }
-                            const vehicleClasse = new Vehicle(vehicle);
+                            const vehicleClasse = new VehicleFactory(vehicle);
                             const id = vehicleClasse.id;
                             const marque = vehicleClasse.brand;
                             const model = vehicleClasse.model;
@@ -105,7 +105,7 @@ function Shop({ data, children }) {
 
                         searchResult.map((vehicules, index) => {
                             const vehicle = { ...vehicules }
-                            const vehicleClasse = new Vehicle(vehicle);
+                            const vehicleClasse = new VehicleFactory(vehicle);
                             const id = vehicleClasse.id;
                             const marque = vehicleClasse.brand;
                             const model = vehicleClasse.model;
@@ -169,7 +169,7 @@ export async function getServerSideProps(context) {
 
     // Fetch data from external API
 
-    const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
+    const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
         method: 'POST',
     })
     const data = await res.json()

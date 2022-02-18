@@ -5,14 +5,26 @@ import styles from './vehicle.module.css';
 import { FaArrowLeft } from 'react-icons/fa';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { GrDeliver } from 'react-icons/gr';
-
+import { useRouter } from 'next/router'
 import Tabs from '../../../components/ui/tabs';
+// import { VehicleFactory } from '../../../utils/classes/Vehicles';
+import { Car } from '../../../utils/classes/Car';
+import { Factory } from '../../../utils/factories/Factory.js'
 
-function vehiclePage() {
+
+
+
+function vehiclePage({ data }) {
+
+
+    const car = new Car(data);
+    const images = car.images
+
+
     return (
         <Container sx={{
             '@media (min-width:1024px)': {
-                maxWidth: '90%'
+                maxWidth: '80%'
             }
         }}>
             <Box className={styles.carousel__slide}>
@@ -41,12 +53,21 @@ function vehiclePage() {
                         alignItems: 'flex-start',
                     },
                 }}>
-                    <Carousel />
+                    <Carousel
+                        images={images}
+                    />
 
                     <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
+                        '@media (min-width:1024px)': {
+                            // ml: '20px',
+                            width: '100%',
+                            flex: '50%',
+                        },
+
                         '@media (min-width:1440px)': {
+                            // ml: '20px',
                             width: '100%',
                             flex: '40%',
                         },
@@ -60,7 +81,7 @@ function vehiclePage() {
                                 pt: '10px'
                             }} variant='span'>2012</Typography>
 
-                            <Typography variant='h5'>Palissade Hyndai</Typography>
+                            <Typography variant='h5'>{car.brand} {car.model}</Typography>
                             <Box sx={{
                                 pb: '10px',
                                 display: 'flex',
@@ -70,14 +91,14 @@ function vehiclePage() {
 
                                 <Typography sx={{
                                     mr: '8px'
-                                }} variant='spanGrey'>Diesel</Typography>
+                                }} variant='spanGrey'>{car.fuel}</Typography>
                                 <Divider orientation="vertical" variant="middle" flexItem sx={{
                                     color: '#707070'
                                 }} />
                                 <Typography sx={{
                                     ml: '8px',
                                     p: '2px'
-                                }} variant='spanGrey'>7 625 km</Typography>
+                                }} variant='spanGrey'>{car.kilometrage} km</Typography>
 
                             </Box>
                         </Box>
@@ -87,7 +108,7 @@ function vehiclePage() {
                                 display: 'none'
                             },
                         }} />
-                        <Box><h3>39 621 €</h3></Box>
+                        <Box><h3>{car.priceHt} €</h3></Box>
                         <Box sx={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -150,6 +171,32 @@ function vehiclePage() {
             </Box>
         </Container>
     )
-}
+};
+// export async function getStaticPaths() {
+//     return {
+//         paths: [
+//             { params: { ... } }
+//         ],
+//         fallback: true // false or 'blocking'
+//     };
+// }
+// This gets called on every request
+export async function getServerSideProps({ params }) {
+
+
+    // Fetch data from external API
+
+    const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/vehicle/`, {
+        method: 'POST',
+        body: params.id
+
+    })
+    const data = await res.json()
+
+
+
+    // Pass data to the page via props
+    return { props: { data } }
+};
 
 export default vehiclePage;
