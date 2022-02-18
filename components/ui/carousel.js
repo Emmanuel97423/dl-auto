@@ -3,11 +3,26 @@ import imageTest from '../../public/carTest.jpg';
 import Image from 'next/image';
 import styles from './carousel.module.css';
 import noImagePlaceHolder from '../../public/no-image.jpg';
+import { useState, useEffect } from 'react';
 
 
 
 
 function carousel(props) {
+
+    useEffect(() => {
+        if (props.images === null) {
+            setImageState(false);
+            return;
+        } else {
+            setImageState(true);
+            return;
+        }
+    })
+
+    const [imageState, setImageState] = useState(false);
+
+
     console.log('props:', props)
     return (<Box className={styles.carousel} sx={{
         '@media (min-width:1024px)': {
@@ -35,19 +50,31 @@ function carousel(props) {
             }
 
         }}>
-            <Image
-                className={styles.large__img}
-                src={props.images[0]}
-                alt="Picture of the author"
-                width={500}
-                height={330}
-                layout="responsive"
-                objectFit='cover'
+            {imageState ?
+                <Image
+                    className={styles.large__img}
+                    src={props.images[0]}
+                    alt="Picture of the author"
+                    width={500}
+                    height={330}
+                    layout="responsive"
+                    objectFit='cover'
 
 
-            />
+                /> : <Image
+                    className={styles.large__img}
+                    src={noImagePlaceHolder}
+                    alt="Picture of the author"
+                    width={500}
+                    height={330}
+                    layout="responsive"
+                    objectFit='cover'
+
+
+                />
+            }
         </Box>
-        <Box className={styles.thumb}>
+        {imageState ? <Box className={styles.thumb}>
 
             {props.images.map((image, i) => {
                 return (
@@ -66,7 +93,7 @@ function carousel(props) {
             })}
 
 
-        </Box>
+        </Box> : null}
     </Box>)
 }
 

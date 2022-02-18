@@ -2,7 +2,7 @@ export class Car {
     constructor(data) {
         console.log('data:', data)
         this._data = data;
-        this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
+        // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
         this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]
         this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
@@ -60,7 +60,7 @@ export class Car {
         // this.images()
     }
     carImages() {
-        return this._arrImage.map(images => {
+        return this._data["ad:ad"]["ad:images"]["ad:image"].map(images => {
 
             return images["ad:representation"][6]._attributes.url;
         })
