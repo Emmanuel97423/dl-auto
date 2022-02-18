@@ -47,7 +47,7 @@ export class Car {
         if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] === undefined) {
             return null;
         } else {
-            return data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text
+            return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text
         }
     };
     get kilometrage() {
