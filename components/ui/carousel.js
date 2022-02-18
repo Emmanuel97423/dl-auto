@@ -1,12 +1,14 @@
 import Box from '@mui/material/Box';
 import imageTest from '../../public/carTest.jpg';
 import Image from 'next/image';
-import styles from './carousel.module.css'
+import styles from './carousel.module.css';
+import noImagePlaceHolder from '../../public/no-image.jpg';
 
 
 
 
 function carousel(props) {
+    console.log('props:', props)
     return (<Box className={styles.carousel} sx={{
         '@media (min-width:1024px)': {
             width: '60%',

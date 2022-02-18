@@ -1,4 +1,4 @@
-import noImagePlaceHolder from '../../public/no-image.jpg'
+import noImagePlaceHolder from '../../public/no-image.jpg';
 import Vehicle from './Car.js'
 
 export class VehicleFactory {

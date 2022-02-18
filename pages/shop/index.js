@@ -45,7 +45,7 @@ function Shop({ data, children }) {
         // const stateDataPaginationResult = dataState;
         // setDataState([]);
 
-        const res = await fetch(`${process.env.API_BASE_URL}/api/vehicules/`, {
+        const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
             method: 'POST',
             body: currentPage,
 

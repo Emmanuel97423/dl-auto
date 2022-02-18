@@ -45,10 +45,11 @@ export default function MyApp(props) {
 
     };
     const handleRouteFinish = (url, { shallow }) => {
-      setTimeout(() => {
-        setLoadingState(false)
+      // setTimeout(() => {
+      //   setLoadingState(false)
 
-      }, 200)
+      // }, 200)
+      setLoadingState(false)
     }
 
     Router.events.on('routeChangeStart', handleRouteStart);
