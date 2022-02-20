@@ -130,8 +130,6 @@ function Shop({ data, children }) {
                                 </CarCard>
                                 {children}
                             </div>)
-
-
                         })
                     }
                 </Box>)

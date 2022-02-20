@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Container, Box, Typography, Divider, Button } from "@mui/material";
+import { Container, Box, Typography, Divider, Button, Modal, } from "@mui/material";
 import Carousel from '../../../components/ui/carousel';
 import styles from './vehicle.module.css';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -9,13 +9,29 @@ import { useRouter } from 'next/router'
 import Tabs from '../../../components/ui/tabs';
 // import { VehicleFactory } from '../../../utils/classes/Vehicles';
 import { Car } from '../../../utils/classes/Car';
-import { Factory } from '../../../utils/factories/Factory.js'
+import { Factory } from '../../../utils/factories/Factory.js';
+import StandardImageList from '../../../components/ui/imagesList'
+import { useState } from 'react';
 
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 
 function vehiclePage({ data }) {
 
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const car = new Car(data);
     const images = car.images
@@ -54,8 +70,10 @@ function vehiclePage({ data }) {
                     },
                 }}>
                     <Carousel
+                        onClick={handleOpen}
                         images={images}
                     />
+                    <Button onClick={handleOpen}>Gallerie d'images</Button>
 
                     <Box sx={{
                         display: 'flex',
@@ -169,7 +187,21 @@ function vehiclePage({ data }) {
                 </Box>
                 <Tabs />
             </Box>
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                sx={{ overflow: 'scroll' }}
+            >
+                <StandardImageList
+                    images={images}
+                />
+            </Modal>
         </Container>
+
+
     )
 };
 // export async function getStaticPaths() {

@@ -1,6 +1,6 @@
 export class Car {
     constructor(data) {
-        console.log('data:', data)
+        // console.log('data:', data)
         this._data = data;
         // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text

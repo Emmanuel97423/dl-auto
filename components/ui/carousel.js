@@ -23,7 +23,7 @@ function carousel(props) {
     const [imageState, setImageState] = useState(false);
 
 
-    console.log('props:', props)
+
     return (<Box className={styles.carousel} sx={{
         '@media (min-width:1024px)': {
             width: '60%',
