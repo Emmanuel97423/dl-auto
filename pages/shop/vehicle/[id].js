@@ -10,28 +10,14 @@ import Tabs from '../../../components/ui/tabs';
 // import { VehicleFactory } from '../../../utils/classes/Vehicles';
 import { Car } from '../../../utils/classes/Car';
 import { Factory } from '../../../utils/factories/Factory.js';
-import StandardImageList from '../../../components/ui/imagesList'
-import { useState } from 'react';
 
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+
 
 
 function vehiclePage({ data }) {
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
 
     const car = new Car(data);
     const images = car.images
@@ -40,7 +26,8 @@ function vehiclePage({ data }) {
     return (
         <Container sx={{
             '@media (min-width:1024px)': {
-                maxWidth: '80%'
+                maxWidth: '80%',
+
             }
         }}>
             <Box className={styles.carousel__slide}>
@@ -70,10 +57,10 @@ function vehiclePage({ data }) {
                     },
                 }}>
                     <Carousel
-                        onClick={handleOpen}
+
                         images={images}
                     />
-                    <Button onClick={handleOpen}>Gallerie d'images</Button>
+
 
                     <Box sx={{
                         display: 'flex',
@@ -188,17 +175,7 @@ function vehiclePage({ data }) {
                 <Tabs />
             </Box>
 
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                sx={{ overflow: 'scroll' }}
-            >
-                <StandardImageList
-                    images={images}
-                />
-            </Modal>
+
         </Container>
 
 

@@ -1,14 +1,22 @@
 import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import imageTest from '../../public/carTest.jpg';
 import Image from 'next/image';
 import styles from './carousel.module.css';
 import noImagePlaceHolder from '../../public/no-image.jpg';
 import { useState, useEffect } from 'react';
+import StandardImageList from './imagesList'
+
+// import { AiFillCloseCircle } from 'react-icons/ai';
 
 
 
 
 function carousel(props) {
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         if (props.images === null) {
@@ -59,6 +67,7 @@ function carousel(props) {
                     height={330}
                     layout="responsive"
                     objectFit='cover'
+                    onClick={handleOpen}
 
 
                 /> : <Image
@@ -86,6 +95,7 @@ function carousel(props) {
                             height={68}
                             layout="fixed"
                             objectFit='cover'
+                            onClick={handleOpen}
 
                         />
                     </Box>
@@ -94,6 +104,32 @@ function carousel(props) {
 
 
         </Box> : null}
+
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            sx={{
+                // overflowY: 'scroll',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '@media (min-width:1024px)': {
+                    // ml: '20px',
+                    width: '80%',
+
+                },
+
+            }}
+        >
+
+            {/* <AiFillCloseCircle /> */}
+            <StandardImageList
+                images={props.images}
+                setOpen={setOpen}
+            />
+        </Modal>
     </Box>)
 }
 
