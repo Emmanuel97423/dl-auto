@@ -14,21 +14,30 @@ import StandardImageList from './imagesList'
 
 function carousel(props) {
 
+
     const [open, setOpen] = useState(false);
+    const [imageState, setImageState] = useState(false);
+    const [imageThumbState, setImageThumbState] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        if (props.images === null) {
-            setImageState(false);
-            return;
-        } else {
+        if (props.images) {
+            setImageThumbState(true)
             setImageState(true);
+            return;
+
+        }
+        else {
+
+            setImageState(false);
+            setImageThumbState(false)
             return;
         }
     })
 
-    const [imageState, setImageState] = useState(false);
+
 
 
 
@@ -38,6 +47,7 @@ function carousel(props) {
             // height: '400px',
             // flex: '10%',
             mr: '15px',
+
         },
         '@media (min-width:1440px)': {
             width: '70%',
@@ -54,7 +64,8 @@ function carousel(props) {
             overflow: 'hidden',
             '@media (min-width:1024px)': {
                 width: '100%',
-                height: '350'
+                height: '350',
+
             }
 
         }}>
@@ -74,9 +85,9 @@ function carousel(props) {
                     className={styles.large__img}
                     src={noImagePlaceHolder}
                     alt="Picture of the author"
-                    width={200}
+                    width={300}
                     height={330}
-                    layout="responsive"
+                    layout="fixed"
                     objectFit='cover'
 
 
@@ -103,7 +114,8 @@ function carousel(props) {
             })}
 
 
-        </Box> : null}
+        </Box> : null
+        }
 
         <Modal
             open={open}

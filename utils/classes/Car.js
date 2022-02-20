@@ -24,12 +24,23 @@ export class Car {
     get getCar() { return this.car }
 
     get images() {
-        if (this._data["ad:ad"]["ad:images"] === undefined) {
-            return null;
-        } else {
-            return this.carImages()
+
+
+        if (this._data["ad:ad"]["ad:images"]) {
+
+            return this.carImages();
         }
-        return this.carImages()
+        else if (this._data["ad:ad"]["ad:images"] === undefined) {
+
+            return null;
+        }
+
+        else if (this._data["ad:ad"]["ad:images"]["ad:image"] === undefined) {
+            return null
+        } else {
+
+        }
+
     };
     get brand() { return this._brand };
 
@@ -66,10 +77,19 @@ export class Car {
         // this.images()
     }
     carImages() {
-        return this._data["ad:ad"]["ad:images"]["ad:image"].map(images => {
 
-            return images["ad:representation"][6]._attributes.url;
-        })
+        if (this._data["ad:ad"]["ad:images"]["ad:image"].length === undefined) {
+
+            return null
+
+
+        } else if (this._data["ad:ad"]["ad:images"]["ad:image"]) {
+            return this._data["ad:ad"]["ad:images"]["ad:image"].map(images => {
+
+                return images["ad:representation"][6]._attributes.url;
+            })
+        }
+
     };
     carPriceHt() {
 

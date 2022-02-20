@@ -12,9 +12,10 @@ export default function StandardImageList(props) {
         <>
             <CancelIcon sx={{
                 position: 'fixed',
+                fontSize: '35px',
                 top: '20px',
                 right: '20px',
-                color: '#A2A2A2',
+                color: '#fff',
                 zIndex: '1',
             }}
                 onClick={handleClose}

@@ -1,14 +1,17 @@
 import noImagePlaceHolder from '../../public/no-image.jpg';
-import Vehicle from './Car.js'
+import Vehicle from './Car.js';
+
 
 export class VehicleFactory {
     constructor(data) {
-        console.log('data:', data["ad:vehicle"]["ad:class"]._attributes.key)
 
 
         if (data["ad:vehicle"]["ad:class"]._attributes.key === 'Car') {
             this._data = data
-        };
+        }
+        // else {
+        //     return null;
+        // };
         // this._request = request;
         this._id = data._attributes.key;
         this._brand = data["ad:vehicle"]["ad:make"]["resource:local-description"]._text;

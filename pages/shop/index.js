@@ -20,10 +20,12 @@ import PaginationApp from '../../components/ui/pagination';
 
 function Shop({ data, children }) {
 
+
     const [page, setPage] = useState(1);
     const [dataState, setDataState] = useState([]);
     // const [dataServerSideState, setDataServerSideState] = useState([]);
     const [vehicleTotalState, setVehicleTotalState] = useState(null);
+
 
 
 
@@ -98,7 +100,10 @@ function Shop({ data, children }) {
                         })
                     }
                 </Box>)
-        } else {
+        }
+
+
+        else {
             return (
                 <Box className={styles.box}>
                     {

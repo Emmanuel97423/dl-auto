@@ -17,7 +17,7 @@ import { Factory } from '../../../utils/factories/Factory.js';
 
 function vehiclePage({ data }) {
 
-
+    const router = useRouter()
 
     const car = new Car(data);
     const images = car.images
@@ -39,8 +39,11 @@ function vehiclePage({ data }) {
                     mb: '20px'
                 }}>
                     <FaArrowLeft className={styles.arrow} /><Typography sx={{
-                        pl: '8px'
-                    }} variant='link'>Retour à la recherche</Typography>
+                        pl: '8px',
+                        cursor: 'pointer'
+                    }} variant='link'
+                        onClick={() => router.back()}
+                    >Retour à la recherche</Typography>
                 </Box>
 
 
