@@ -77,6 +77,7 @@ export class Car {
         }
         return this._kilometrage
     };
+    get power() { return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"]._attributes.value }
 
     get cubicCapacity() { return this._cubicCapacity ? this._cubicCapacity : null }
     get licensedWeight() {

@@ -111,6 +111,11 @@ function vehiclePage({ data }) {
                                 }} variant='spanGrey'>{car.kilometrage} km</Typography>
 
                             </Box>
+                            <Typography sx={{
+                                fontSize: '12px',
+                                fontWeight: 'bold',
+                            }} variant='spanGrey'>{car.cubicCapacity} Cc {car.power} Ch</Typography>
+
                         </Box>
                         <Divider orientation="horizontal" flexItem sx={{
                             color: '#707070',
