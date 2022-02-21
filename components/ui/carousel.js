@@ -35,7 +35,7 @@ function carousel(props) {
             setImageThumbState(false)
             return;
         }
-    })
+    }, [])
 
 
 
@@ -79,6 +79,7 @@ function carousel(props) {
                     layout="responsive"
                     objectFit='cover'
                     onClick={handleOpen}
+                    priority={true}
 
 
                 /> : <Image

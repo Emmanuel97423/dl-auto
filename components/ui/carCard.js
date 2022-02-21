@@ -19,14 +19,17 @@ function carCard(props) {
 
     const [routerState, setRouterState] = useState('start');
     const [isACar, setIsACAr] = useState(false);
-
-    // useEffect(() => {
-    //     if()
-    // })
-
-    setTimeout(() => {
+    function routerChange() {
         setRouterState('finish')
-    }, 3000)
+    }
+    useEffect(() => {
+
+        setTimeout(() => {
+            routerChange()
+        }, 3000)
+    }, [])
+
+
 
 
 
