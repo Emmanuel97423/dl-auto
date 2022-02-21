@@ -1,6 +1,9 @@
+import { Tax } from './Tax.js'
+
 export class Car {
     constructor(data) {
-        // console.log('data:', data)
+        console.log('data:', data);
+
         this._data = data;
         // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
@@ -8,6 +11,11 @@ export class Car {
         // this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
         this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"];
         this._priceHt = data["ad:ad"]["ad:price"]["ad:consumer-price-amount"]._attributes.value;
+        this._cubicCapacity = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
+        // this._licensedWeight = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:licensed-weight"]._attributes.value;
+        this._classVehicle = data["ad:ad"]["ad:vehicle"]["ad:class"]._attributes.key;
+        this._category = data["ad:ad"]["ad:vehicle"]["ad:category"]._attributes.key;
+
 
 
 
@@ -16,12 +24,14 @@ export class Car {
     set data(data) { return this._data = data; }
     get data() { return this._data };
 
-    set arrImage(arrImage) { return this._arrImage = arrImage }
+    // set arrImage(arrImage) { return this._arrImage = arrImage }
     get arrImage() { return this._arrImage; }
 
-    get getFilter() { return this.filter() };
+    // get getCar() { return this.car };
 
-    get getCar() { return this.car }
+    get getVehicleClass() {
+        return this._classVehicle;
+    }
 
     get images() {
 
@@ -52,8 +62,6 @@ export class Car {
         }
         // return this._data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"] ? data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text : null 
     };
-    // set model(model) { this._model = model };
-
     get fuel() {
         if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] === undefined) {
             return null;
@@ -69,13 +77,24 @@ export class Car {
         }
         return this._kilometrage
     };
-    get priceHt() { return this.carPriceHt() }
 
-    filter() {
-        // console.log('data:', this._data)
-        // console.log('this._arrImage:', this._arrImage)
-        // this.images()
+    get cubicCapacity() { return this._cubicCapacity ? this._cubicCapacity : null }
+    get licensedWeight() {
+        return this._cubicCapacity ? this._cubicCapacity : null
+    };
+
+    get height() {
+
+        if (this._category === 'Limousine' || this._category === 'Cabrio') {
+            return 150;
+        } else { return 170 }
     }
+    get priceHt() { return this.carPriceHt() };
+
+    get priceTtc() {
+        return this.carPriceTtc();
+    }
+
     carImages() {
 
         if (this._data["ad:ad"]["ad:images"]["ad:image"].length === undefined) {
@@ -99,5 +118,19 @@ export class Car {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
         return numberWithSpaces(parseInt(this._priceHt).toFixed(0))
+    }
+
+    carPriceTtc() {
+        const ttc = new Tax(this._cubicCapacity, this._priceHt, this._licensedWeight, this._classVehicle, this.height);
+
+        const priceTtc = ttc.getPriceTtc
+        console.log('priceTtc:', priceTtc)
+        function numberWithSpaces(x) {
+
+            // x.toFixed(0)
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        return numberWithSpaces(priceTtc)
     }
 }

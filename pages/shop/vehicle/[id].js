@@ -20,6 +20,8 @@ function vehiclePage({ data }) {
     const router = useRouter()
 
     const car = new Car(data);
+    // const priceTc = car.priceTtc
+
     const images = car.images
 
 
@@ -116,7 +118,7 @@ function vehiclePage({ data }) {
                                 display: 'none'
                             },
                         }} />
-                        <Box><h3>{car.priceHt} €</h3></Box>
+                        <Box><h3>{car.priceTtc} €</h3></Box>
                         <Box sx={{
                             display: 'flex',
                             flexDirection: 'column',

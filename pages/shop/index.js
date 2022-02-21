@@ -23,19 +23,10 @@ function Shop({ data, children }) {
 
     const [page, setPage] = useState(1);
     const [dataState, setDataState] = useState([]);
-    // const [dataServerSideState, setDataServerSideState] = useState([]);
     const [vehicleTotalState, setVehicleTotalState] = useState(null);
-
-
-
-
-
     const searchResult = data["search:search-result"]["search:ads"]["ad:ad"];
     const vehicleTotal = data["search:search-result"]["search:total"]._text
 
-    // console.log('data:', data)
-    // setVehicleTotal(data);
-    // console.log('vehicleTotal:', vehicleTotal)
 
     const totalPages = data["search:search-result"]["search:max-pages"]._text;
     const totalPagesInt = parseInt(totalPages)
@@ -78,6 +69,8 @@ function Shop({ data, children }) {
                             const kilometrage = vehicleClasse.kilometrage;
                             const carburant = vehicleClasse.carburant;
                             const img = vehicleClasse.image;
+                            const priceTtc = vehicleClasse.getPriceTtc;
+                            console.log('priceTtc:', priceTtc)
 
 
 
@@ -86,7 +79,7 @@ function Shop({ data, children }) {
                                     id={id}
                                     marque={marque}
                                     model={model}
-                                    price={price}
+                                    price={priceTtc}
                                     kilometrage={kilometrage}
                                     carburant={carburant}
                                     img={img}
@@ -118,6 +111,8 @@ function Shop({ data, children }) {
                             const kilometrage = vehicleClasse.kilometrage;
                             const carburant = vehicleClasse.carburant;
                             const img = vehicleClasse.image;
+                            const priceTtc = vehicleClasse.getPriceTtc;
+                            console.log('priceTtc:', priceTtc);
 
 
 
@@ -126,7 +121,7 @@ function Shop({ data, children }) {
                                     id={id}
                                     marque={marque}
                                     model={model}
-                                    price={price}
+                                    price={priceTtc}
                                     kilometrage={kilometrage}
                                     carburant={carburant}
                                     img={img}

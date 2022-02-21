@@ -1,9 +1,11 @@
 import noImagePlaceHolder from '../../public/no-image.jpg';
 import Vehicle from './Car.js';
+import { Tax } from './Tax.js';
 
 
 export class VehicleFactory {
     constructor(data) {
+        // console.log('data:', data)
 
 
         if (data["ad:vehicle"]["ad:class"]._attributes.key === 'Car') {
@@ -30,7 +32,9 @@ export class VehicleFactory {
 
         if (data["ad:images"]) {
             this._image = data["ad:images"]["ad:image"]["ad:representation"][1]._attributes.url;
-        }
+        };
+        this._cubicCapacity = data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
+
 
     }
     get data() { return this._data };
@@ -50,11 +54,13 @@ export class VehicleFactory {
 
     get price() { return this.numberWithSpaces(parseInt(this._price).toFixed(0)) };
 
+    get getPriceTtc() { return this.numberWithSpaces(parseInt(this.priceTtc().toFixed(0))) }
     get image() { return this._image ? this._image : noImagePlaceHolder };
     set image(image) { return this._image = image }
 
     get carburant() { return this._carburant };
     set carburant(carburant) { return this._carburant = carburant };
+
 
     get getConvert() {
         return this.convert()
@@ -88,5 +94,9 @@ export class VehicleFactory {
 
         // x.toFixed(0)
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    };
+    priceTtc() {
+        const ttc = new Tax(this._cubicCapacity, this._price);
+        return ttc.getPriceTtc;
     }
 }
