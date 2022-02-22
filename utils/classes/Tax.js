@@ -1,6 +1,6 @@
 export class Tax {
     constructor(cubicCapacity, priceHt) {
-        console.log('cubicCapacity:', cubicCapacity)
+        // console.log('cubicCapacity:', cubicCapacity)
         this._cubicCapacity = parseInt(cubicCapacity);
         this._priceHt = parseInt(priceHt);
         // this._licensedWeight = licensedWeight;
@@ -34,7 +34,7 @@ export class Tax {
         const franceToReunion = 1050;
         const fret = parseInt(this._priceHt) + franceToReunion;
         const assurance = fret * 0.015;
-        console.log('fret + assurance:', fret + assurance)
+        // console.log('fret + assurance:', fret + assurance)
         return Math.ceil(fret + assurance)
 
     }
@@ -44,42 +44,42 @@ export class Tax {
         const fretAllToFr = 1000;
         const vehicleUsedVerification = 500;
         const tsm = 3 * 67;
-        console.log('tsm:', tsm)
+        // console.log('tsm:', tsm)
         const vat = Math.ceil(this.fretToRun() * 0.085);
-        console.log('vat:', vat);
+        // console.log('vat:', vat);
 
         let om = "";
         const omr = Math.round(this.fretToRun() * 0.025);
-        console.log('omr:', omr);
+        // console.log('omr:', omr);
 
         if (this._cubicCapacity < 1000) {
-            console.log('<1.0l')
-            console.log('this.fretToRun() * 0.105:', this.fretToRun() * 0.105);
+            // console.log('<1.0l')
+            // console.log('this.fretToRun() * 0.105:', this.fretToRun() * 0.105);
             om = this.fretToRun() * 0.105
 
         } else if (this._cubicCapacity < 1500) {
-            console.log('<1.5l');
+            // console.log('<1.5l');
             om = Math.round(this.fretToRun() * 0.155);
-            console.log('om:', om)
+            // console.log('om:', om)
 
         } else if (this._cubicCapacity < 2000) {
-            console.log('<2.0l');
+            // console.log('<2.0l');
             om = Math.round(this.fretToRun() * 0.205);
-            console.log('om:', om)
+            // console.log('om:', om)
 
         } else if (this._cubicCapacity < 2500) {
-            console.log('<2.5l');
+            // console.log('<2.5l');
             om = Math.round(this.fretToRun() * 0.255);
-            console.log('om:', om)
+            // console.log('om:', om)
 
         } else {
-            console.log('+2.5l');
+            // console.log('+2.5l');
             om = Math.round(this.fretToRun() * 0.340);
-            console.log('om:', om)
+            // console.log('om:', om)
 
         };
         const totalExpeDom = dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
-        console.log('totalExpedom:', totalExpeDom)
+        // console.log('totalExpedom:', totalExpeDom)
         return totalExpeDom
 
 
@@ -192,9 +192,9 @@ export class Tax {
     };
     priceTtc() {
         const ttc = this.fretToRun() + this.expedom() + (this.marge() + 1000)
-        console.log('this._priceHt:', this._priceHt)
-        console.log('this.marge():', this.marge())
-        console.log('ttc:', ttc)
+        // console.log('this._priceHt:', this._priceHt)
+        // console.log('this.marge():', this.marge())
+        // console.log('ttc:', ttc)
         return Math.ceil(ttc);
     }
 

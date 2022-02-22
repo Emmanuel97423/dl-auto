@@ -1,5 +1,11 @@
 .box{
-    display:'flex';   
+    display:'flex';  
+    z-index: 0; 
+}
+
+.InfiniteScroll{
+    /* position: fixed; */
+    /* z-index: -1; */
 }
 
 @media only screen and (min-width:640px) {

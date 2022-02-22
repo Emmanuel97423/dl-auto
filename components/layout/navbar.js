@@ -17,7 +17,16 @@ export default function Navbar() {
     };
 
     return (
-        <Box sx={{ width: 1, p: 2, boxShadow: 3 }}>
+        <Box sx={{
+            width: 1,
+            p: 2,
+            boxShadow: 3,
+            position: 'sticky',
+            top: 0,
+            zIndex: '3',
+            backgroundColor: 'white'
+
+        }}>
             <Link href="/shop">
                 <Button
                     id="basic-button"
@@ -43,12 +52,12 @@ export default function Navbar() {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
-            <Button
+            {/* <Button
                 id="basic-button"
 
             >
                 <Typography variant="h4">Service</Typography>
-            </Button>
+            </Button> */}
         </Box>
     );
 }
