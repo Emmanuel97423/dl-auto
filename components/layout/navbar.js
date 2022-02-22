@@ -17,7 +17,16 @@ export default function Navbar() {
     };
 
     return (
-        <Box sx={{ width: 1, p: 2, boxShadow: 3 }}>
+        <Box sx={{
+            width: 1,
+            p: 2,
+            boxShadow: 3,
+            position: 'sticky',
+            top: 0,
+            zIndex: 'tooltip',
+            backgroundColor: 'white'
+
+        }}>
             <Link href="/shop">
                 <Button
                     id="basic-button"
