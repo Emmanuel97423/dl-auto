@@ -23,7 +23,10 @@ export default function handler(req, res) {
 
             res.status(200).json(result)
 
-        }).catch(console.error);
+        }).catch(e => {
+            console.log('error:', e)
+            res.status(500).json(e)
+        });
     } else if (req.body !== null) {
         fetch(`https://services.mobile.de/search-api/search?${searchParams}`, {
             method: 'GET',
@@ -43,6 +46,9 @@ export default function handler(req, res) {
 
             res.status(200).json(result)
 
-        }).catch(console.error);
+        }).catch(e => {
+            console.log('error:', e)
+            res.status(500).json(e)
+        });
     }
 }
