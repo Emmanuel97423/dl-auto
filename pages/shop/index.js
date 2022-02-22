@@ -4,16 +4,14 @@ import Container from '@mui/material/Container';
 import CarCard from '../../components/ui/carCard';
 import Box from '@mui/material/Box';
 import styles from './shop.module.css';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import SearchBar from '../../components/search/searchBar'
 import { VehicleFactory } from '../../utils/classes/Vehicles';
 import { useState, useEffect } from "react";
-import Router from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import PaginationApp from '../../components/ui/pagination';
+
 
 
 
@@ -24,14 +22,15 @@ function Shop({ data, children }) {
     const [posts, setPosts] = useState(vehiclesList);
 
     const [hasMore, setHasMore] = useState(true);
-    const [pageState, setPageState] = useState(1)
+    const [pageState, setPageState] = useState(1);
+
 
     //Call API 
 
     const getMorePost = async () => {
-        console.log('posts Length:', posts.length);
         setPageState(pageState + 1);
-        console.log('pageState:', pageState)
+
+
 
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
             method: 'POST',
@@ -71,8 +70,19 @@ function Shop({ data, children }) {
                     dataLength={posts.length}
                     next={getMorePost}
                     hasMore={hasMore}
-                    loader={<h3> Loading...</h3>}
-                    endMessage={<h4>Nothing more to show</h4>}
+                    loader={
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            mt: 2,
+                        }}>
+                            <CircularProgress></CircularProgress>
+                            <h4>Chargement...</h4>
+                        </Box>
+                    }
+                    endMessage={<h4>Il n'y a plus rien à montrer pour le moment...</h4>}
                 >
                     <Box className={styles.box}>
                         {

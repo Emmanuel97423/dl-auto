@@ -3,7 +3,7 @@ export default function handler(req, res) {
     console.log('req:', req.body);
     const currentPage = parseInt(req.body)
 
-    const searchParams = `classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=${req.body}&page.size=20`;
+    const searchParams = `roadworthy=1&price.min=2000&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=${req.body}&page.size=20`;
     if (req.body) {
         fetch(`https://services.mobile.de/search-api/search?${searchParams}`, {
             method: 'GET',
