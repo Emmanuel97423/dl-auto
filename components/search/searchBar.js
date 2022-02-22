@@ -60,9 +60,12 @@ function searchBar({ data }) {
 
     return (
         <FormControl sx={{
-            m: 1, width: 1, position: 'sticky',
-            top: 85,
+            // m: 1, 
+            width: 1,
+            // position: 'sticky',
+            // top: 85,
             backgroundColor: 'white',
+
         }}>
             <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
             <Select

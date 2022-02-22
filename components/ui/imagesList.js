@@ -16,13 +16,16 @@ export default function StandardImageList(props) {
                 top: '20px',
                 right: '20px',
                 color: '#fff',
-                zIndex: '1',
+                zIndex: '2',
+
             }}
                 onClick={handleClose}
             />
             <ImageList sx={{
                 width: '100%',
                 height: '100%',
+
+                zIndex: '1',
 
                 // display: 'flex',
                 // display: 'flex',

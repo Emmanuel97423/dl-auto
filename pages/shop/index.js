@@ -44,13 +44,14 @@ function Shop({ data, children }) {
         setPosts((post) => [...post, ...newVehicules]);
     };
 
-    return (<Container className={styles.container} maxWidth="l">
+    return (<Container className={styles.container} maxWidth="l" >
         {/* <Box className={styles.searchMenu} sx={{
-            width: '100%', position: 'sticky',
+            width: 1,
+            position: 'sticky',
 
-            pt: 1,
-            top: 85,
-            zIndex: 'modal',
+            p: 1,
+            top: 78,
+            zIndex: '2',
             backgroundColor: 'white',
             '@media (min-width:1024px)': {
                 display: 'flex',
@@ -61,7 +62,7 @@ function Shop({ data, children }) {
             <SearchBar />
 
         </Box> */}
-        <Box >
+        < Box >
 
             <Box>
                 <Typography sx={{ mt: '10px', mb: '10px' }}>+600 000 véhicules trouvés</Typography>
@@ -115,7 +116,7 @@ function Shop({ data, children }) {
             </Box>
 
         </Box>
-    </Container>);
+    </Container >);
 
 
 

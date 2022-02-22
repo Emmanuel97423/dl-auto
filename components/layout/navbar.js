@@ -23,7 +23,7 @@ export default function Navbar() {
             boxShadow: 3,
             position: 'sticky',
             top: 0,
-            zIndex: 'tooltip',
+            zIndex: '3',
             backgroundColor: 'white'
 
         }}>
@@ -52,12 +52,12 @@ export default function Navbar() {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
-            <Button
+            {/* <Button
                 id="basic-button"
 
             >
                 <Typography variant="h4">Service</Typography>
-            </Button>
+            </Button> */}
         </Box>
     );
 }
