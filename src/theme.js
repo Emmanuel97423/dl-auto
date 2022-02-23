@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { blue, red } from '@mui/material/colors';
 
 // Create a theme instance.
 const theme = createTheme({
@@ -10,19 +10,21 @@ const theme = createTheme({
         secondary: {
             main: '#19857b',
         },
+        tercary: {
+            main: '#c5cae9'
+        },
+        divider: {
+            main: blue.A200,
+        },
         error: {
             main: red.A400,
         },
-        divider: {
-            main: red.A400,
-        },
+
     },
     typography: {
         fontFamily: 'Roboto',
     },
-    Image: {
 
-    }
 });
 
 theme.typography.h1 = {
@@ -75,7 +77,9 @@ theme.typography.spanBold = {
 theme.typography.link = {
     fontSize: '16px',
     color: '#556cd6',
-    fontWeight: '700'
-}
+    fontWeight: '700',
+    textTransform: 'Capitalize',
+};
+
 
 export default theme;

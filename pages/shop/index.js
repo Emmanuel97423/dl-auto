@@ -3,22 +3,17 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CarCard from '../../components/ui/carCard';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import styles from './shop.module.css';
 import { VehicleFactory } from '../../utils/classes/Vehicles';
 import { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
-// import formatInTimeZone from 'date-fns-tz';
-// import { formatDistance, formatInTimeZone, subDays } from 'date-fns';
+import SearchInput from '../../components/search/inputSearch';
+import Filter from '../../components/search/filter';
 import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz'
 
 
-
 import InfiniteScroll from "react-infinite-scroll-component";
-
-
-
-
-
 
 
 function Shop({ data, children }) {
@@ -43,22 +38,10 @@ function Shop({ data, children }) {
     console.log('pageState:', pageState)
 
 
-
-
-
-
-
-
-
-
-
     //Call API 
 
     const getMorePost = async () => {
         setPageState(pageState + 1);
-
-
-
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
             method: 'POST',
             headers: {
@@ -69,8 +52,6 @@ function Shop({ data, children }) {
                 page: pageState,
                 dateCheck: dateTimeDe
             }),
-
-
         });
         const newPosts = await res.json();
         const newVehicules = newPosts["search:search-result"]["search:ads"]["ad:ad"]
@@ -95,9 +76,20 @@ function Shop({ data, children }) {
             <SearchBar />
 
         </Box> */}
-        < Box >
+        <Box>
+
+            <SearchInput />
+            <Divider color="#c5cae9"
+                sx={{
+                    mt: 1,
+
+                }} />
+            <Filter />
+            <Divider color="#c5cae9" />
 
             <Box>
+
+
                 <Typography sx={{ mt: '10px', mb: '10px' }}>+600 000 véhicules trouvés</Typography>
                 <InfiniteScroll
                     className={styles.InfiniteScroll}
