@@ -23,6 +23,7 @@ function Shop({ data, children }) {
 
     const [hasMore, setHasMore] = useState(true);
     const [pageState, setPageState] = useState(1);
+    console.log('pageState:', pageState)
 
 
     //Call API 
@@ -70,6 +71,8 @@ function Shop({ data, children }) {
                     dataLength={posts.length}
                     next={getMorePost}
                     hasMore={hasMore}
+                    scrollThreshold={1}
+
                     loader={
                         <Box sx={{
                             display: 'flex',
