@@ -7,6 +7,10 @@ import styles from './shop.module.css';
 import { VehicleFactory } from '../../utils/classes/Vehicles';
 import { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
+// import formatInTimeZone from 'date-fns-tz';
+// import { formatDistance, formatInTimeZone, subDays } from 'date-fns';
+import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz'
+
 
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -18,12 +22,34 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 
 function Shop({ data, children }) {
-    const vehiclesList = data["search:search-result"]["search:ads"]["ad:ad"]
+    const vehiclesList = data["search:search-result"]["search:ads"]["ad:ad"];
+
+
+    const date = new Date(Date.now())
+    const utcDate = zonedTimeToUtc(date, 'Europe/Berlin')
+
+    // console.log('date:', date);
+    const dateTimeDe = formatInTimeZone(date, 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ssXXX').replace('+', '%2B').replace(' ', 'T')
+    console.log('dateTimeDe:', dateTimeDe)
+    // console.log('format(new Date(Date.now())):', format(new Date(Date.now()), 'MM/dd/yyyy'))
+
+
     const [posts, setPosts] = useState(vehiclesList);
 
     const [hasMore, setHasMore] = useState(true);
     const [pageState, setPageState] = useState(1);
+    const [checkDate, setCheckDate] = useState(dateTimeDe);
+    console.log('checkDate:', checkDate)
     console.log('pageState:', pageState)
+
+
+
+
+
+
+
+
+
 
 
     //Call API 
@@ -35,7 +61,14 @@ function Shop({ data, children }) {
 
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
             method: 'POST',
-            body: pageState,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                page: pageState,
+                dateCheck: dateTimeDe
+            }),
 
 
         });
