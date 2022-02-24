@@ -79,13 +79,13 @@ function Shop({ data, children }) {
         <Box>
 
             <SearchInput />
-            <Divider color="#c5cae9"
+            <Divider color="#e0e0e0"
                 sx={{
                     mt: 1,
 
                 }} />
             <Filter />
-            <Divider color="#c5cae9" />
+            <Divider color="#e0e0e0" />
 
             <Box>
 
