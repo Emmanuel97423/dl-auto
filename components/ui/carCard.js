@@ -35,29 +35,59 @@ function carCard(props) {
 
 
     if (routerState === 'finish') {
-        return (<Box className={styles.box} sx={{ mb: '16px', display: 'flex', flexDirection: 'column', border: 1, borderColor: 'grey', borderRadius: '15px', }}>
+        return (<Box className={styles.box} sx={{
+            mb: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            border: 1,
+            borderColor: '#bdbdbd',
+            borderRadius: '15px',
+            overflow: 'hidden',
+        }}>
 
-            <IconButton sx={{ mb: '16px', alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
-                <FavoriteIcon sx={{ color: 'blue' }} />
-            </IconButton>
+            {/* <IconButton sx={{ mb: '16px', alignSelf: 'flex-end', color: 'grey', top: '12px', right: '2px' }}>
+                <FavoriteIcon sx={{ color: '#757575' }} />
+            </IconButton> */}
 
-            <div>
-                <Image
-                    className={styles.image}
-                    src={props.img}
-                    alt="Picture of the author"
-                    width={500}
-                    height={400}
-                    layout="responsive"
-                    placeholder="blur"
-                    blurDataURL={props.img}
-                    priority={true}
+            <Link href={`/shop/vehicle/${props.id}`}>
+                <Box sx={{
+                    position: 'relative',
+                    display: 'block',
+                    cursor: 'pointer',
+
+                }}>
+                    <IconButton sx={{
+                        position: 'absolute',
+                        top: 10,
+                        right: 10,
+                        mb: '16px',
+                        alignSelf: 'flex-end',
+                        color: 'grey',
+                        zIndex: 2,
+                        // top: '12px',
+                        // left: '2px'
+                        backgroundColor: '#eeeeee',
+                        border: '1px solid #bdbdbd'
+                    }}>
+                        <FavoriteIcon sx={{ color: '#757575' }} />
+                    </IconButton>
+                    <Image
+                        className={styles.image}
+                        src={props.img}
+                        alt="Picture of the author"
+                        width={500}
+                        height={400}
+                        layout="responsive"
+                        placeholder="blur"
+                        blurDataURL={props.img}
+                        priority={true}
 
 
 
-                />
-            </div>
-            <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
+                    />
+                </Box>
+            </Link>
+            <Divider orientation="horizontal" flexItem sx={{ color: '#bdbdbd' }} />
             <Box sx={{ p: '16px' }} >
                 <Typography variant="span" >2012</Typography>
                 <Typography variant="h5" sx={{ mt: "-7px", mb: "-7px" }}>{props.marque} {props.model}</Typography>
@@ -70,7 +100,7 @@ function carCard(props) {
                     <Divider orientation="vertical" variant="middle" flexItem sx={{ color: 'grey' }} />
                     <Typography variant="span" sx={{ ml: '8px', p: '2px' }}>{props.kilometrage} km</Typography>
                 </Box>
-                <Divider orientation="horizontal" flexItem sx={{ color: 'grey' }} />
+                <Divider orientation="horizontal" flexItem sx={{ color: '#bdbdbd' }} />
                 <Box className={styles.bottom} sx={{ mt: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
                     <Typography className={styles.price} sx={{

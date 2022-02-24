@@ -57,7 +57,7 @@ function carousel(props) {
     }}>
         <Box className={styles.first__img} sx={{
 
-            border: '1px solid black',
+            border: '1px solid #bdbdbd',
             borderRadius: '10px',
             mb: '10px',
             // p: '5px',
@@ -79,6 +79,8 @@ function carousel(props) {
                     layout="responsive"
                     objectFit='cover'
                     onClick={handleOpen}
+                    placeholder="blur"
+                    blurDataURL={props.images[0]}
                     priority={true}
 
 
@@ -108,6 +110,10 @@ function carousel(props) {
                             layout="fixed"
                             objectFit='cover'
                             onClick={handleOpen}
+                            placeholder="blur"
+                            blurDataURL={image}
+                            priority={true}
+
 
                         />
                     </Box>

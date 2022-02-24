@@ -5,8 +5,8 @@ export default function filter() {
     return (
         <Box
             sx={{
-                mt: 2,
-                mb: 2,
+                mt: 0.5,
+                mb: 0.5,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -17,7 +17,7 @@ export default function filter() {
                 sx={{
                     mr: 4,
                 }}><FilterAltIcon /><Typography variant="link">Filtre</Typography></Button>
-            <Divider color="#c5cae9" orientation="vertical" variant="middle" flexItem />
+            <Divider color="#e0e0e0" orientation="vertical" variant="middle" flexItem />
             <Button
                 sx={{
                     ml: 4,
