@@ -3,6 +3,11 @@ import { blue, red } from '@mui/material/colors';
 
 // Create a theme instance.
 const theme = createTheme({
+    toggle: {
+        ':hover': {
+            backgroundColor: 'red'
+        }
+    },
     palette: {
         primary: {
             main: '#556cd6',
@@ -56,7 +61,7 @@ theme.typography.h5 = {
     fontWeight: '700',
 };
 theme.typography.h6 = {
-    fontSize: '25px',
+    fontSize: '18px',
     textTransform: 'Capitalize',
     color: '#353535',
     fontWeight: '700',

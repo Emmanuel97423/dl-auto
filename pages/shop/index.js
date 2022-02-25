@@ -9,7 +9,7 @@ import { VehicleFactory } from '../../utils/classes/Vehicles';
 import { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import SearchInput from '../../components/search/inputSearch';
-import Filter from '../../components/search/filter';
+import Filter from '../../components/search/filter/filterNav';
 import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz'
 
 
