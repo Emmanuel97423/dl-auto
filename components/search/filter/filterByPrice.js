@@ -6,12 +6,33 @@ import { useState } from 'react'
 function valuetext(value) {
     return `${value}°C`;
 }
-
+const minDistance = 10;
 export default function RangeSlider() {
-    const [value, setValue] = useState([20, 37]);
+    const [value, setValue] = useState([10000, 500000]);
+    const [minPrice, setMinPrice] = useState()
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+
+    const handleChange = (event, newValue, activeThumb) => {
+        console.log('event:', event.target.value)
+        console.log('newValue:', newValue)
+        if (!Array.isArray(newValue)) {
+            return;
+        }
+
+        if (activeThumb === 0) {
+            setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+        } else {
+            setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+        }
+
+        // setValue(newValue);
+
+    };
+    const minPriceChange = (event) => {
+
+        setMinPrice(event.target.value)
+
+
     };
 
     return (
@@ -31,14 +52,16 @@ export default function RangeSlider() {
             }}>
                 <TextField id="outlined-uncontrolled"
                     label="Prix Minimum"
-                    defaultValue={value}
-                    value={value}
+                    defaultValue="20000"
+                    value={value[0] + " €"}
+                    onChange={handleChange}
                     sx={{
                         flex: .45
                     }} />
                 <TextField id="outlined-uncontrolled"
-                    label="Prix Minimum"
-                    defaultValue="1000"
+                    label="Prix Maximum"
+                    defaultValue="2000000"
+                    value={value[1] + " €"}
                     sx={{
                         flex: .45
                     }}
@@ -58,6 +81,10 @@ export default function RangeSlider() {
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     getAriaValueText={valuetext}
+                    max={2000000}
+                    min={0}
+                    marks
+                    step={10000}
                 />
             </Box>
         </Box>

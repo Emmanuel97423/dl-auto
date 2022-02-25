@@ -37,7 +37,7 @@ export default function toggleCondition() {
 
                     flex: .5,
                     // backgroundColor: 'white',
-                    color: 'black',
+                    // color: 'grey',
                     m: 1,
                     fontSize: '14px',
                     textTransform: 'Capitalize',
