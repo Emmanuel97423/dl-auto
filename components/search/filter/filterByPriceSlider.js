@@ -1,37 +1,28 @@
 // import * as React from 'react';
-import { Box, Slider, TextField } from '@mui/material';
+import { Box, Slider, TextField, Typography } from '@mui/material';
 import { useState } from 'react'
 
 
 function valuetext(value) {
-    return `${value}°C`;
+    return `${value}€`;
 }
-const minDistance = 10;
+
 export default function RangeSlider() {
-    const [value, setValue] = useState([10000, 500000]);
-    const [minPrice, setMinPrice] = useState()
+    const [value, setValue] = useState([5, 80]);
+    const [maxRange, setMaxRange] = useState(false)
+
 
 
     const handleChange = (event, newValue, activeThumb) => {
-        console.log('event:', event.target.value)
-        console.log('newValue:', newValue)
-        if (!Array.isArray(newValue)) {
-            return;
-        }
 
-        if (activeThumb === 0) {
-            setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+        setValue(newValue);
+        if (newValue[1] === 100) {
+            setMaxRange(true)
+            console.log('maxRange:', maxRange)
         } else {
-            setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+            setMaxRange(false)
+            console.log('maxRange:', maxRange)
         }
-
-        // setValue(newValue);
-
-    };
-    const minPriceChange = (event) => {
-
-        setMinPrice(event.target.value)
-
 
     };
 
@@ -43,7 +34,7 @@ export default function RangeSlider() {
             alignItems: 'center',
             width: 1
         }}>
-            <Box sx={{
+            {/* <Box sx={{
                 mt: 3,
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -52,9 +43,9 @@ export default function RangeSlider() {
             }}>
                 <TextField id="outlined-uncontrolled"
                     label="Prix Minimum"
-                    defaultValue="20000"
-                    value={value[0] + " €"}
-                    onChange={handleChange}
+                    defaultValue="5000"
+                    value={value + " €"}
+                    onChange={minPriceChange}
                     sx={{
                         flex: .45
                     }} />
@@ -67,24 +58,34 @@ export default function RangeSlider() {
                     }}
                 />
 
-            </Box>
+            </Box> */}
             <Box sx={{
                 width: .9,
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center'
 
             }}>
+                <Box sx={{
+                    width: 1,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mt: 2
+                }}>
+                    <Typography>{value[0]}K</Typography><Typography>{maxRange ? '+' : null} {value[1]}K</Typography>
+                </Box>
                 <Slider
-                    getAriaLabel={() => 'Temperature range'}
+                    getAriaLabel={() => 'Fourchette de prix'}
                     value={value}
                     onChange={handleChange}
-                    valueLabelDisplay="auto"
+                    // valueLabelDisplay="auto"
                     getAriaValueText={valuetext}
-                    max={2000000}
+                    max={100}
                     min={0}
                     marks
-                    step={10000}
+                    step={10}
                 />
             </Box>
         </Box>
