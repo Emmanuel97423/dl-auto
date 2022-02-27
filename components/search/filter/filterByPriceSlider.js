@@ -18,10 +18,10 @@ export default function RangeSlider() {
         setValue(newValue);
         if (newValue[1] === 100) {
             setMaxRange(true)
-            console.log('maxRange:', maxRange)
+
         } else {
             setMaxRange(false)
-            console.log('maxRange:', maxRange)
+
         }
 
     };
@@ -34,31 +34,7 @@ export default function RangeSlider() {
             alignItems: 'center',
             width: 1
         }}>
-            {/* <Box sx={{
-                mt: 3,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
 
-            }}>
-                <TextField id="outlined-uncontrolled"
-                    label="Prix Minimum"
-                    defaultValue="5000"
-                    value={value + " €"}
-                    onChange={minPriceChange}
-                    sx={{
-                        flex: .45
-                    }} />
-                <TextField id="outlined-uncontrolled"
-                    label="Prix Maximum"
-                    defaultValue="2000000"
-                    value={value[1] + " €"}
-                    sx={{
-                        flex: .45
-                    }}
-                />
-
-            </Box> */}
             <Box sx={{
                 width: .9,
                 display: 'flex',

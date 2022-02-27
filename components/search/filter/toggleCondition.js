@@ -11,6 +11,10 @@ export default function toggleCondition() {
         console.log('event:', event)
         setCondition(newCondition);
     };
+
+    function sliderValue() {
+
+    }
     return (
         <ToggleButtonGroup
             color="primary"
