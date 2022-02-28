@@ -1,15 +1,13 @@
 export class Tax {
-    constructor(cubicCapacity, priceHt) {
-        // console.log('cubicCapacity:', cubicCapacity)
+    constructor(cubicCapacity, priceHt, fuel) {
+        console.log('fuel:', fuel)
+
         this._cubicCapacity = parseInt(cubicCapacity);
         this._priceHt = parseInt(priceHt);
+        this._fuel = fuel;
         // this._licensedWeight = licensedWeight;
         // this._classVehicle = classVehicle;
         // this._height = height;
-
-
-
-
 
     };
     set cubicCapacity(cubicCapacity) { return this._cubicCapacity = cubicCapacity };

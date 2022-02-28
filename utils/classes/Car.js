@@ -32,7 +32,6 @@ export class Car {
     get getVehicleClass() {
         return this._classVehicle;
     }
-
     get images() {
 
 
@@ -53,7 +52,6 @@ export class Car {
 
     };
     get brand() { return this._brand };
-
     get model() {
         if (this._model === undefined) {
             return null;
@@ -78,12 +76,10 @@ export class Car {
         return this._kilometrage
     };
     get power() { return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"]._attributes.value }
-
     get cubicCapacity() { return this._cubicCapacity ? this._cubicCapacity : null }
     get licensedWeight() {
         return this._cubicCapacity ? this._cubicCapacity : null
     };
-
     get height() {
 
         if (this._category === 'Limousine' || this._category === 'Cabrio') {
@@ -91,11 +87,9 @@ export class Car {
         } else { return 170 }
     }
     get priceHt() { return this.carPriceHt() };
-
     get priceTtc() {
         return this.carPriceTtc();
     }
-
     carImages() {
 
         if (this._data["ad:ad"]["ad:images"]["ad:image"].length === undefined) {
@@ -120,9 +114,8 @@ export class Car {
         }
         return numberWithSpaces(parseInt(this._priceHt).toFixed(0))
     }
-
     carPriceTtc() {
-        const ttc = new Tax(this._cubicCapacity, this._priceHt, this._licensedWeight, this._classVehicle, this.height);
+        const ttc = new Tax(this._cubicCapacity, this._priceHt, this.fuel);
 
         const priceTtc = ttc.getPriceTtc
         console.log('priceTtc:', priceTtc)
