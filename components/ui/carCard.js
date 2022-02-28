@@ -78,6 +78,7 @@ function carCard(props) {
                         width={500}
                         height={400}
                         layout="responsive"
+                        objectFit='cover'
                         placeholder="blur"
                         blurDataURL={props.img}
                         priority={true}
