@@ -25,7 +25,7 @@ function Shop({ data, children }) {
 
     // console.log('date:', date);
     const dateTimeDe = formatInTimeZone(date, 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ssXXX').replace('+', '%2B').replace(' ', 'T')
-    console.log('dateTimeDe:', dateTimeDe)
+
     // console.log('format(new Date(Date.now())):', format(new Date(Date.now()), 'MM/dd/yyyy'))
 
 
@@ -34,8 +34,7 @@ function Shop({ data, children }) {
     const [hasMore, setHasMore] = useState(true);
     const [pageState, setPageState] = useState(1);
     const [checkDate, setCheckDate] = useState(dateTimeDe);
-    console.log('checkDate:', checkDate)
-    console.log('pageState:', pageState)
+
 
 
     //Call API 

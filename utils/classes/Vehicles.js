@@ -11,10 +11,7 @@ export class VehicleFactory {
         if (data["ad:vehicle"]["ad:class"]._attributes.key === 'Car') {
             this._data = data
         }
-        // else {
-        //     return null;
-        // };
-        // this._request = request;
+
         this._id = data._attributes.key;
         this._brand = data["ad:vehicle"]["ad:make"]["resource:local-description"]._text;
 
@@ -29,11 +26,15 @@ export class VehicleFactory {
         };
 
         this._price = data["ad:price"]["ad:consumer-price-amount"]._attributes.value;
+        // console.log('this._priceht:', this._price)
 
         if (data["ad:images"]) {
             this._image = data["ad:images"]["ad:image"]["ad:representation"][1]._attributes.url;
         };
         this._cubicCapacity = data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
+        this._fuel = data["ad:vehicle"]["ad:specifics"]["ad:fuel"] ? data["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text : null;
+        this._vatable = data["ad:price"]["ad:vatable"]._attributes.value;
+
 
 
     }
@@ -58,8 +59,8 @@ export class VehicleFactory {
     get image() { return this._image ? this._image : noImagePlaceHolder };
     set image(image) { return this._image = image }
 
-    get carburant() { return this._carburant };
-    set carburant(carburant) { return this._carburant = carburant };
+    get fuel() { return this._fuel };
+    set fuel(fuel) { return this._fuel = fuel };
 
 
     get getConvert() {
@@ -96,7 +97,7 @@ export class VehicleFactory {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     };
     priceTtc() {
-        const ttc = new Tax(this._cubicCapacity, this._price);
+        const ttc = new Tax(this._cubicCapacity, this._price, this._fuel, this._vatable);
         return ttc.getPriceTtc;
     }
 }

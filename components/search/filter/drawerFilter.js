@@ -6,7 +6,7 @@ import SimpleAccordion from './filterByModel';
 
 
 export default function drawerFilter(props) {
-    console.log('props:', props)
+
     const toggleDrawer = () => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
