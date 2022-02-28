@@ -1,10 +1,15 @@
 export class Tax {
-    constructor(cubicCapacity, priceHt, fuel) {
-        console.log('fuel:', fuel)
+    constructor(cubicCapacity, priceHt, fuel, vatable) {
+
 
         this._cubicCapacity = parseInt(cubicCapacity);
+        console.log('this._cubicCapacity:', this._cubicCapacity)
         this._priceHt = parseInt(priceHt);
+        console.log('this._priceHt:', this._priceHt)
         this._fuel = fuel;
+        console.log('this._fuel:', this._fuel)
+        this._vatable = vatable;
+        console.log('this._vatable:', this._vatable)
         // this._licensedWeight = licensedWeight;
         // this._classVehicle = classVehicle;
         // this._height = height;
@@ -14,7 +19,10 @@ export class Tax {
     get cubicCapacity() { return this._cubicCapacity };
 
     set priceHt(priceHt) { this._priceHt = priceHt }
-    get priceHt() { return this._priceHt }
+    get priceHt() { return this._priceHt };
+
+    set vatable(vatable) { this.vatable = vatable }
+    get vatable() { return this._vatable }
 
     get GetFretToFr() {
         return this.fretToRun()
@@ -38,47 +46,72 @@ export class Tax {
     }
 
     expedom() {
+
         const dedouanTtc = 352.63;
         const fretAllToFr = 1000;
         const vehicleUsedVerification = 500;
         const tsm = 3 * 67;
-        // console.log('tsm:', tsm)
-        const vat = Math.ceil(this.fretToRun() * 0.085);
-        // console.log('vat:', vat);
+
+        //Boolean Taxable
+        let vat = null;
+        if (this._vatable === 'false') {
+            vat = Math.ceil(this.fretToRun() * 0.085)
+            console.log('vat:', vat);
+        } else if (this._vatable === 'true') {
+            console.log('vat:', vat);
+            vat = null
+        }
+
+
 
         let om = "";
         const omr = Math.round(this.fretToRun() * 0.025);
-        // console.log('omr:', omr);
+        console.log('omr:', omr)
 
-        if (this._cubicCapacity < 1000) {
-            // console.log('<1.0l')
-            // console.log('this.fretToRun() * 0.105:', this.fretToRun() * 0.105);
-            om = this.fretToRun() * 0.105
+        if (this._fuel === 'Essence' || this._fuel === 'Diesel') {
 
-        } else if (this._cubicCapacity < 1500) {
-            // console.log('<1.5l');
-            om = Math.round(this.fretToRun() * 0.155);
-            // console.log('om:', om)
+            if (this._cubicCapacity < 1000) {
 
-        } else if (this._cubicCapacity < 2000) {
-            // console.log('<2.0l');
-            om = Math.round(this.fretToRun() * 0.205);
-            // console.log('om:', om)
+                // console.log('<1.0l')
+                // console.log('this.fretToRun() * 0.105:', this.fretToRun() * 0.105);
+                om = this.fretToRun() * 0.105
 
-        } else if (this._cubicCapacity < 2500) {
-            // console.log('<2.5l');
-            om = Math.round(this.fretToRun() * 0.255);
-            // console.log('om:', om)
+            } else if (this._cubicCapacity <= 1500) {
+                // console.log('<1.5l');
+                om = Math.round(this.fretToRun() * 0.155);
+                // console.log('om:', om)
 
-        } else {
-            // console.log('+2.5l');
-            om = Math.round(this.fretToRun() * 0.340);
-            // console.log('om:', om)
+            } else if (this._cubicCapacity <= 2000) {
+                console.log('<2.0l');
+                om = Math.round(this.fretToRun() * 0.205);
+                console.log('om:', om)
 
-        };
-        const totalExpeDom = dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
-        // console.log('totalExpedom:', totalExpeDom)
-        return totalExpeDom
+            } else if (this._cubicCapacity <= 2500) {
+                // console.log('<2.5l');
+                om = Math.round(this.fretToRun() * 0.255);
+                // console.log('om:', om)
+
+            } else if (this._cubicCapacity >= 2500) {
+                // console.log('+2.5l');
+                om = Math.round(this.fretToRun() * 0.340);
+                // console.log('om:', om)
+            };
+            const totalExpeDom = dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
+            console.log('totalExpeDom:', totalExpeDom)
+            return totalExpeDom
+        }
+
+
+        // const totalExpeDom = dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
+        if (this._fuel === 'Electrique') {
+            return dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat
+        } else if (this._fuel === 'Hybride (essence/électricité)') {
+            if (this._cubicCapacity <= 2501) {
+                om = Math.round(this.fretToRun() * 0.04);
+                return dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
+            }
+        }
+        // return totalExpeDom
 
 
 
@@ -193,7 +226,7 @@ export class Tax {
         // console.log('this._priceHt:', this._priceHt)
         // console.log('this.marge():', this.marge())
         // console.log('ttc:', ttc)
-        return Math.ceil(ttc);
+        return 100 * Math.round(ttc / 100);
     }
 
 

@@ -2,19 +2,23 @@ import { Tax } from './Tax.js'
 
 export class Car {
     constructor(data) {
-        console.log('data:', data);
+        // console.log('data:', data)
+
 
         this._data = data;
         // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
         this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
         this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]
-        // this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text;
+        this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] ? data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text : null;
         this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"];
         this._priceHt = data["ad:ad"]["ad:price"]["ad:consumer-price-amount"]._attributes.value;
+        // console.log('this._priceHt:', this._priceHt)
         this._cubicCapacity = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
         // this._licensedWeight = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:licensed-weight"]._attributes.value;
         this._classVehicle = data["ad:ad"]["ad:vehicle"]["ad:class"]._attributes.key;
         this._category = data["ad:ad"]["ad:vehicle"]["ad:category"]._attributes.key;
+        this._vatable = data["ad:ad"]["ad:price"]["ad:vatable"]._attributes.value
+
 
 
 
@@ -75,11 +79,12 @@ export class Car {
         }
         return this._kilometrage
     };
-    get power() { return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"]._attributes.value }
+    get power() { return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"] ? this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"]._attributes.value : null }
     get cubicCapacity() { return this._cubicCapacity ? this._cubicCapacity : null }
     get licensedWeight() {
         return this._cubicCapacity ? this._cubicCapacity : null
     };
+    get vatable() { return this._vatable };
     get height() {
 
         if (this._category === 'Limousine' || this._category === 'Cabrio') {
@@ -115,10 +120,11 @@ export class Car {
         return numberWithSpaces(parseInt(this._priceHt).toFixed(0))
     }
     carPriceTtc() {
-        const ttc = new Tax(this._cubicCapacity, this._priceHt, this.fuel);
+        const ttc = new Tax(this._cubicCapacity, this._priceHt, this._fuel, this._vatable);
 
         const priceTtc = ttc.getPriceTtc
         console.log('priceTtc:', priceTtc)
+
         function numberWithSpaces(x) {
 
             // x.toFixed(0)

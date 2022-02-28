@@ -22,7 +22,7 @@ export default function Layout({ children }) {
     useEffect(() => {
         setIsMobile(window.matchMedia("(max-width: 768px)").matches)
     });
-    console.log('isMobile:', isMobile)
+
 
     return (
         <Box className={style.layout}>
