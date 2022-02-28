@@ -30,7 +30,6 @@ function Shop({ data, children }) {
 
 
     const [posts, setPosts] = useState(vehiclesList);
-
     const [hasMore, setHasMore] = useState(true);
     const [pageState, setPageState] = useState(1);
     const [checkDate, setCheckDate] = useState(dateTimeDe);
@@ -40,7 +39,7 @@ function Shop({ data, children }) {
     //Call API 
 
     const getMorePost = async () => {
-        setPageState(pageState + 1);
+        setPageState(pageState + 3);
         const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
             method: 'POST',
             headers: {
@@ -115,8 +114,10 @@ function Shop({ data, children }) {
                         {
 
                             posts.map((vehicules, index) => {
+
                                 const vehicle = { ...vehicules }
                                 const vehicleClasse = new VehicleFactory(vehicle);
+
                                 const id = vehicleClasse.id;
                                 const marque = vehicleClasse.brand;
                                 const model = vehicleClasse.model;
