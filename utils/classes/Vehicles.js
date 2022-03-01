@@ -5,36 +5,54 @@ import { Tax } from './Tax.js';
 
 export class VehicleFactory {
     constructor(data) {
-        // console.log('data:', data)
+        // console.log('data:', data["vehicle"]["class"]['@key'])
 
 
-        if (data["ad:vehicle"]["ad:class"]._attributes.key === 'Car') {
+        if (data["vehicle"]["class"]['@key'] === 'Car') {
             this._data = data
+
         }
 
-        this._id = data._attributes.key;
-        this._brand = data["ad:vehicle"]["ad:make"]["resource:local-description"]._text;
+        this._id = data['@key'];
 
-        if (data["ad:vehicle"]["ad:model"]) {
-            this._model = data["ad:vehicle"]["ad:model"]["resource:local-description"]._text
+        this._brand = data["vehicle"]["make"]["local-description"]['$'];
+
+
+
+        if (data["vehicle"]["model"]) {
+            this._model = data["vehicle"]["model"]["local-description"]['$']
+
         }
-        if (data["ad:vehicle"]["ad:specifics"]["ad:mileage"]) {
-            this._kilometrage = data["ad:vehicle"]["ad:specifics"]["ad:mileage"]._attributes.value;
+
+        if (data["vehicle"]["specifics"]["mileage"]) {
+            this._kilometrage = data["vehicle"]["specifics"]["mileage"]['@value'];
+
         }
-        if (data["ad:vehicle"]["ad:specifics"]["ad:fuel"]) {
-            this.carburant = data["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text
+        if (data["vehicle"]["specifics"]["fuel"]) {
+            this.carburant = data["vehicle"]["specifics"]["fuel"]["local-description"]['$']
+
         };
 
-        this._price = data["ad:price"]["ad:consumer-price-amount"]._attributes.value;
+
+        this._price = data["price"]["consumer-price-amount"]['@value'];
+
+
         // console.log('this._priceht:', this._price)
 
-        if (data["ad:images"]) {
-            this._image = data["ad:images"]["ad:image"]["ad:representation"][1]._attributes.url;
-        };
-        this._cubicCapacity = data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
-        this._fuel = data["ad:vehicle"]["ad:specifics"]["ad:fuel"] ? data["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text : null;
-        this._vatable = data["ad:price"]["ad:vatable"]._attributes.value;
+        if (data["images"]) {
+            this._image = data["images"]["image"]["representation"][3]['@url'];
 
+        };
+
+        this._cubicCapacity = data["vehicle"]["specifics"]["cubic-capacity"] ? data["vehicle"]["specifics"]["cubic-capacity"]["@value"] : null;
+
+
+        this._fuel = data["vehicle"]["specifics"]["fuel"] ? data["vehicle"]["specifics"]["fuel"]["local-description"]['$'] : null;
+
+
+        this._vatable = data["price"]["vatable"]['@value'];
+        console.log('this._vatable:', this._vatable)
+        return
 
 
     }
@@ -68,24 +86,24 @@ export class VehicleFactory {
     };
     get getVehicle() { return this.searchVehicle() }
 
-    convert() {
-        let obj = [];
-        if (this._data["ad:vehicle"]["ad:model"]) {
-            return obj = [
-                {
-                    'id': this._id,
-                    'marque': this._brand,
-                    'model': this._model,
-                    'kilometrage': this._kilometrage,
-                    'price': this._price,
-                    'image': this._image,
-                    'carburant': this._carburant,
-                }
-            ]
+    // convert() {
+    //     let obj = [];
+    //     if (this._data["vehicle"]["model"]) {
+    //         return obj = [
+    //             {
+    //                 'id': this._id,
+    //                 'marque': this._brand,
+    //                 'model': this._model,
+    //                 'kilometrage': this._kilometrage,
+    //                 'price': this._price,
+    //                 'image': this._image,
+    //                 'carburant': this._carburant,
+    //             }
+    //         ]
 
-                ;
-        }
-    };
+    //             ;
+    //     }
+    // };
 
     searchVehicle() {
         const vehicle = new Vehicle(this._data);

@@ -10,14 +10,15 @@ import { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import SearchInput from '../../components/search/inputSearch';
 import Filter from '../../components/search/filter/filterNav';
-import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz'
+import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz';
+import axios from 'axios';
 
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
 function Shop({ data, children }) {
-    const vehiclesList = data["search:search-result"]["search:ads"]["ad:ad"];
+    const vehiclesList = data["search-result"]["ads"]["ad"];
 
 
     const date = new Date(Date.now())
@@ -303,14 +304,22 @@ export async function getServerSideProps(context) {
 
     // Fetch data from external API
 
-    const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
-        method: 'POST',
-    })
-    const data = await res.json()
+    const res = await axios.get(`${process.env.API_BASE_URL}/api/vehicles/`).then((response) => {
+        console.log('response:', response);
+        return response.data;
+        // Pass data to the page via props
 
 
-    // Pass data to the page via props
+    }).catch(e => { console.error(e); })
+
+
+    // const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
+    //     method: 'POST',
+    // })
+    const data = await res
+
     return { props: { data } }
+
 };
 
 
