@@ -89,7 +89,7 @@ function vehiclePage({ data }) {
                         }}>
                             <Typography sx={{
                                 pt: '10px'
-                            }} variant='span'>2012</Typography>
+                            }} variant='span'>{car.constructionDate}</Typography>
 
                             <Typography variant='h5'>{car.brand} {car.model}</Typography>
                             <Box sx={{

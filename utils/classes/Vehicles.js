@@ -5,7 +5,7 @@ import { Tax } from './Tax.js';
 
 export class VehicleFactory {
     constructor(data) {
-        // console.log('data:', data["vehicle"]["class"]['@key'])
+        // console.log('data:', data["vehicle"]["specifics"]['condition']['local-description']['$'])
 
 
         if (data["vehicle"]["class"]['@key'] === 'Car') {
@@ -55,6 +55,10 @@ export class VehicleFactory {
 
 
 
+
+
+
+
     }
     get data() { return this._data };
     set data(data) { this._data = data };
@@ -70,6 +74,8 @@ export class VehicleFactory {
 
     get kilometrage() { return this._kilometrage ? this._kilometrage : null };
     set kilometrage(kilometrage) { return this._kilometrage = kilometrage };
+
+    get condition() { return this._data["vehicle"]["specifics"]['condition']['local-description']['$'] }
 
     get price() { return this.numberWithSpaces(parseInt(this._price).toFixed(0)) };
 
