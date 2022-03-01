@@ -41,20 +41,27 @@ function Shop({ data, children }) {
     //Call API 
 
     const getMorePost = async () => {
-        setPageState(pageState + 1);
-        const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                page: pageState,
-                dateCheck: dateTimeDe
-            }),
-        });
-        const newPosts = await res.json();
-        const newVehicules = newPosts["search:search-result"]["search:ads"]["ad:ad"]
+        setPageState(pageState + 3);
+        // const res = await fetch(`${process.env.API_BASE_URL}/api/vehicles/`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         page: pageState,
+        //         dateCheck: dateTimeDe
+        //     }),
+        // });
+        const res = axios.post(`${process.env.API_BASE_URL}/api/vehicles/`, {
+            page: pageState,
+            dateCheck: dateTimeDe
+        }).then((response) => {
+
+            return response.data
+        })
+        const newPosts = await res;
+        const newVehicules = newPosts["search-result"]["ads"]["ad"]
         setPosts((post) => [...post, ...newVehicules]);
     };
 

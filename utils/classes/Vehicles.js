@@ -51,8 +51,8 @@ export class VehicleFactory {
 
 
         this._vatable = data["price"]["vatable"]['@value'];
-        console.log('this._vatable:', this._vatable)
-        return
+
+
 
 
     }
