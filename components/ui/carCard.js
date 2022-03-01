@@ -18,6 +18,7 @@ function carCard(props) {
 
 
 
+
     const [routerState, setRouterState] = useState('start');
     const [isACar, setIsACAr] = useState(false);
     function routerChange() {
@@ -90,7 +91,7 @@ function carCard(props) {
             </Link>
             <Divider orientation="horizontal" flexItem sx={{ color: '#bdbdbd' }} />
             <Box sx={{ p: '16px' }} >
-                <Typography variant="span" >2012</Typography>
+                <Typography variant="span" >{props.condition}</Typography>
                 <Typography variant="h5" sx={{ mt: "-7px", mb: "-7px" }}>{props.marque} {props.model}</Typography>
                 <Box sx={{
                     display: 'flex',

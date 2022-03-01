@@ -2,22 +2,21 @@ import { Tax } from './Tax.js'
 
 export class Car {
     constructor(data) {
-        // console.log('data:', data)
-
-
         this._data = data;
-        // this._arrImage = data["ad:ad"]["ad:images"]["ad:image"];
-        this._brand = data["ad:ad"]["ad:vehicle"]["ad:make"]["resource:local-description"]._text
-        this._model = data["ad:ad"]["ad:vehicle"]["ad:model"]
-        this._fuel = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] ? data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text : null;
-        this._kilometrage = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"];
-        this._priceHt = data["ad:ad"]["ad:price"]["ad:consumer-price-amount"]._attributes.value;
-        // console.log('this._priceHt:', this._priceHt)
-        this._cubicCapacity = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"] ? data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:cubic-capacity"]._attributes.value : null;
-        // this._licensedWeight = data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:licensed-weight"]._attributes.value;
-        this._classVehicle = data["ad:ad"]["ad:vehicle"]["ad:class"]._attributes.key;
-        this._category = data["ad:ad"]["ad:vehicle"]["ad:category"]._attributes.key;
-        this._vatable = data["ad:ad"]["ad:price"]["ad:vatable"]._attributes.value
+        // this._arrImage = data["ad"]["images"]["image"];
+        this._brand = data["ad"]["vehicle"]["make"]["local-description"]['$']
+        this._model = data["ad"]["vehicle"]["model"]
+        this._fuel = data["ad"]["vehicle"]["specifics"]["fuel"] ? data["ad"]["vehicle"]["specifics"]["fuel"]["local-description"]['$'] : null;
+        this._kilometrage = data["ad"]["vehicle"]["specifics"]["mileage"];
+        this._priceHt = data["ad"]["price"]["consumer-price-amount"]['@value']
+        this._cubicCapacity = data["ad"]["vehicle"]["specifics"]["cubic-capacity"] ? data["ad"]["vehicle"]["specifics"]["cubic-capacity"]['@value'] : null;
+        // this._licensedWeight = data["ad"]["vehicle"]["specifics"]["licensed-weight"]._attributes.value;
+        this._classVehicle = data["ad"]["vehicle"]["class"]['@key'];
+        this._category = data["ad"]["vehicle"]["category"]['@key'];
+        this._vatable = data["ad"]["price"]["vatable"]['@value']
+
+
+
 
 
 
@@ -25,6 +24,7 @@ export class Car {
 
 
     }
+
     set data(data) { return this._data = data; }
     get data() { return this._data };
 
@@ -39,47 +39,49 @@ export class Car {
     get images() {
 
 
-        if (this._data["ad:ad"]["ad:images"]) {
+        if (this._data["ad"]["images"]) {
 
             return this.carImages();
         }
-        else if (this._data["ad:ad"]["ad:images"] === undefined) {
+        else if (this._data["ad"]["images"] === undefined) {
 
             return null;
         }
 
-        else if (this._data["ad:ad"]["ad:images"]["ad:image"] === undefined) {
+        else if (this._data["ad"]["images"]["image"] === undefined) {
             return null
         } else {
 
         }
 
     };
-    get brand() { return this._brand };
+    get brand() { return this._data["ad"]["vehicle"]["make"]["local-description"] ? this._data["ad"]["vehicle"]["make"]["local-description"]['$'] : null };
     get model() {
         if (this._model === undefined) {
             return null;
         } else {
-            return this._data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text
+            return this._data["ad"]["vehicle"]["model"]["local-description"]['$']
         }
-        // return this._data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"] ? data["ad:ad"]["ad:vehicle"]["ad:model"]["resource:local-description"]._text : null 
+        // return this._data["ad"]["vehicle"]["model"]["local-description"] ? data["ad"]["vehicle"]["model"]["local-description"]._text : null 
     };
+    get constructionDate() { return this._data['ad']["vehicle"]['specifics']["construction-year"] ? this._data.ad.vehicle.specifics["construction-year"]["@value"] : null }
     get fuel() {
-        if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"] === undefined) {
+        if (this._data["ad"]["vehicle"]["specifics"]["fuel"] === undefined) {
             return null;
         } else {
-            return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:fuel"]["resource:local-description"]._text
+            return this._data["ad"]["vehicle"]["specifics"]["fuel"]["local-description"]['$']
+
         }
     };
     get kilometrage() {
-        if (this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"] === undefined) {
+        if (this._data["ad"]["vehicle"]["specifics"]["mileage"] === undefined) {
             return null;
         } else {
-            return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:mileage"]._attributes.value
+            return this._data["ad"]["vehicle"]["specifics"]["mileage"]['@value']
         }
         return this._kilometrage
     };
-    get power() { return this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"] ? this._data["ad:ad"]["ad:vehicle"]["ad:specifics"]["ad:power"]._attributes.value : null }
+    get power() { return this._data["ad"]["vehicle"]["specifics"]["power"] ? this._data["ad"]["vehicle"]["specifics"]["power"]['@value'] : null }
     get cubicCapacity() { return this._cubicCapacity ? this._cubicCapacity : null }
     get licensedWeight() {
         return this._cubicCapacity ? this._cubicCapacity : null
@@ -97,15 +99,15 @@ export class Car {
     }
     carImages() {
 
-        if (this._data["ad:ad"]["ad:images"]["ad:image"].length === undefined) {
+        if (this._data["ad"]["images"]["image"].length === undefined) {
 
             return null
 
 
-        } else if (this._data["ad:ad"]["ad:images"]["ad:image"]) {
-            return this._data["ad:ad"]["ad:images"]["ad:image"].map(images => {
+        } else if (this._data["ad"]["images"]["image"]) {
+            return this._data["ad"]["images"]["image"].map(images => {
 
-                return images["ad:representation"][6]._attributes.url;
+                return images["representation"][6]['@url'];
             })
         }
 

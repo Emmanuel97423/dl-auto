@@ -3,13 +3,13 @@ export class Tax {
 
 
         this._cubicCapacity = parseInt(cubicCapacity);
-        console.log('this._cubicCapacity:', this._cubicCapacity)
+        // console.log('this._cubicCapacity:', this._cubicCapacity)
         this._priceHt = parseInt(priceHt);
-        console.log('this._priceHt:', this._priceHt)
+        // console.log('this._priceHt:', this._priceHt)
         this._fuel = fuel;
-        console.log('this._fuel:', this._fuel)
+        // console.log('this._fuel:', this._fuel)
         this._vatable = vatable;
-        console.log('this._vatable:', this._vatable)
+        // console.log('this._vatable:', this._vatable)
         // this._licensedWeight = licensedWeight;
         // this._classVehicle = classVehicle;
         // this._height = height;
@@ -56,9 +56,9 @@ export class Tax {
         let vat = null;
         if (this._vatable === 'false') {
             vat = Math.ceil(this.fretToRun() * 0.085)
-            console.log('vat:', vat);
+            // console.log('vat:', vat);
         } else if (this._vatable === 'true') {
-            console.log('vat:', vat);
+            // console.log('vat:', vat);
             vat = null
         }
 
@@ -66,7 +66,7 @@ export class Tax {
 
         let om = "";
         const omr = Math.round(this.fretToRun() * 0.025);
-        console.log('omr:', omr)
+        // console.log('omr:', omr)
 
         if (this._fuel === 'Essence' || this._fuel === 'Diesel') {
 
@@ -82,9 +82,9 @@ export class Tax {
                 // console.log('om:', om)
 
             } else if (this._cubicCapacity <= 2000) {
-                console.log('<2.0l');
+                // console.log('<2.0l');
                 om = Math.round(this.fretToRun() * 0.205);
-                console.log('om:', om)
+                // console.log('om:', om)
 
             } else if (this._cubicCapacity <= 2500) {
                 // console.log('<2.5l');
@@ -97,7 +97,7 @@ export class Tax {
                 // console.log('om:', om)
             };
             const totalExpeDom = dedouanTtc + fretAllToFr + vehicleUsedVerification + tsm + vat + om + omr
-            console.log('totalExpeDom:', totalExpeDom)
+            // console.log('totalExpeDom:', totalExpeDom)
             return totalExpeDom
         }
 
