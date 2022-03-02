@@ -7,7 +7,8 @@ function valuetext(value) {
     return `${value}€`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
+
     const [value, setValue] = useState([5, 80]);
     const [maxRange, setMaxRange] = useState(false)
 
@@ -22,7 +23,9 @@ export default function RangeSlider() {
         } else {
             setMaxRange(false)
 
-        }
+        };
+
+        props.handleFilterPrice(value)
 
     };
 

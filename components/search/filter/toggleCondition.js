@@ -2,14 +2,14 @@ import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { useState } from 'react';
 import style from './toggleCondition.module.css'
 
-export default function toggleCondition() {
+export default function toggleCondition(props) {
 
-    const [condition, setCondition] = useState('occasion');
+
+    const [condition, setCondition] = useState(props.filterCondition);
 
     function handleChange(event, newCondition) {
-        console.log('newAlignment:', newCondition)
-        console.log('event:', event)
         setCondition(newCondition);
+        props.handleCondition(newCondition)
     };
 
     function sliderValue() {

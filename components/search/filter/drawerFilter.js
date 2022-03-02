@@ -7,6 +7,7 @@ import SimpleAccordion from './filterByModel';
 
 export default function drawerFilter(props) {
 
+
     const toggleDrawer = () => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -52,7 +53,10 @@ export default function drawerFilter(props) {
                             // borderRadius: 10,
                         }}
                     >
-                        <ToogleCondition />
+                        <ToogleCondition
+                            filterCondition={props.filterCondition}
+                            handleCondition={props.handleCondition}
+                        />
                     </Box>
                     <Box
                         sx={{
@@ -60,7 +64,9 @@ export default function drawerFilter(props) {
                         }}>
                         <Typography variant="h6">Magasiner par prix (€)</Typography>
                         <Box>
-                            <RangePriceSlider />
+                            <RangePriceSlider
+                                handleFilterPrice={props.handleFilterPrice}
+                            />
                         </Box>
 
                     </Box>
