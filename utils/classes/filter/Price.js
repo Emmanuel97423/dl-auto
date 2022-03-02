@@ -3,6 +3,7 @@ export default class FilterPrice {
     constructor(data, request) {
 
 
+
         this._data = data;
 
         this._request = request;
@@ -28,10 +29,10 @@ export default class FilterPrice {
         // });
         return this._data.filter(item => {
             const vehicle = new VehicleFactory(item);
-            console.log('parseInt(vehicle.getPriceTtc):', convertStringToInt(vehicle.getPriceTtc))
+            // console.log('parseInt(vehicle.getPriceTtc):', convertStringToInt(vehicle.getPriceTtc))
             if (convertStringToInt(vehicle.getPriceTtc) >= this._minPrice && convertStringToInt(vehicle.getPriceTtc) <= this._maxPrice) {
 
-                console.log('vehicle:', item);
+
                 return item
             }
 

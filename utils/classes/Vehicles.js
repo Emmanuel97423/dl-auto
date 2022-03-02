@@ -1,7 +1,7 @@
 import noImagePlaceHolder from '../../public/no-image.jpg';
 import Vehicle from './Car.js';
 import { Tax } from './Tax.js';
-import FilterPrice from './filter/Price'
+
 
 
 export class VehicleFactory {
