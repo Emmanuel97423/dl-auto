@@ -3,6 +3,7 @@ import Vehicle from './Car.js';
 import { Tax } from './Tax.js';
 
 
+
 export class VehicleFactory {
     constructor(data) {
         // console.log('data:', data["vehicle"]["specifics"]['condition']['local-description']['$'])
@@ -51,22 +52,15 @@ export class VehicleFactory {
 
 
         this._vatable = data["price"]["vatable"]['@value'];
-
-
-
-
-
-
-
-
     }
     get data() { return this._data };
     set data(data) { this._data = data };
 
     get request() { return this._request }
-    set request(request) { this._request = request }
+    set request(request) { this._request = request };
 
     get id() { return this._id };
+
     get brand() { return this._brand };
 
     get model() { return this._model ? this._model : null };
@@ -79,9 +73,11 @@ export class VehicleFactory {
 
     get price() { return this.numberWithSpaces(parseInt(this._price).toFixed(0)) };
 
-    get getPriceTtc() { return this.numberWithSpaces(parseInt(this.priceTtc().toFixed(0))) }
+    get getPriceTtc() { return this.numberWithSpaces(parseInt(this.priceTtc().toFixed(0))) };
+
     get image() { return this._image ? this._image : noImagePlaceHolder };
-    set image(image) { return this._image = image }
+
+    set image(image) { return this._image = image };
 
     get fuel() { return this._fuel };
     set fuel(fuel) { return this._fuel = fuel };
@@ -123,5 +119,10 @@ export class VehicleFactory {
     priceTtc() {
         const ttc = new Tax(this._cubicCapacity, this._price, this._fuel, this._vatable);
         return ttc.getPriceTtc;
-    }
+    };
+    // filter() {
+    //     if (this._request === 'byPrice') {
+    //         const filterPriceClass = new FilterPrice(this._request)
+    //     }
+    // }
 }

@@ -8,10 +8,11 @@ export default function handler(req, res) {
             'Content-Type': 'application/xml',
             'Accept-Encoding': 'gzip',
             'Accept-Language': 'fr',
-            "X-Requested-With": "XMLHttpRequest"
+            "X-Requested-With": "XMLHttpRequest",
+
         }
     };
-    const searchParams = `imageCount.min=6&roadworthy=1&price.min=2000&accidentDamaged=0&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=1&page.size=35`;
+    const searchParams = `imageCount.min=6&roadworthy=1&price.min=2000&accidentDamaged=0&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=1&page.size=100`;
     if (!req.body) {
         axios.get(`https://services.mobile.de/search-api/search?${searchParams}`, headerConfig).then(response => {
             const result = response.data;
@@ -22,7 +23,7 @@ export default function handler(req, res) {
         });
     } else if (req.body) {
         const page = req.body.page;
-        const searchParamsWithBody = `imageCount.min=6&roadworthy=1&price.min=2000&accidentDamaged=0&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=${page}&page.size=35`;
+        const searchParamsWithBody = `imageCount.min=6&roadworthy=1&price.min=2000&accidentDamaged=0&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=${page}&page.size=100`;
         axios.get(`https://services.mobile.de/search-api/search?${searchParamsWithBody}`, headerConfig).then(response => {
             const result = response.data;
             res.status(200).json(result);

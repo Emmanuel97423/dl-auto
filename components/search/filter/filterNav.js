@@ -5,9 +5,10 @@ import DrawerFilter from './drawerFilter'
 
 import { useEffect, useState } from 'react'
 
-export default function filter() {
+export default function filter(props) {
+
+
     function toggleDrawer() {
-        console.log('activeDrawer:', activeDrawer)
         setActiveDrawer(true)
     }
     const [activeDrawer, setActiveDrawer] = useState(false);
@@ -58,6 +59,10 @@ export default function filter() {
             <DrawerFilter
                 activeDrawer={activeDrawer}
                 setActiveDrawer={setActiveDrawer}
+                filterCondition={props.filterCondition}
+                handleCondition={props.handleCondition}
+                handleFilterPrice={props.handleFilterPrice}
+                filterPrice={props.filterPrice}
             />
 
         </Box>

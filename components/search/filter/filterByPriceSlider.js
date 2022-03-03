@@ -1,15 +1,29 @@
 // import * as React from 'react';
 import { Box, Slider, TextField, Typography } from '@mui/material';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function valuetext(value) {
     return `${value}€`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
+    console.log('props:', props.filterPrice[0]);
+
+    useEffect(() => {
+
+        if (props.filterPrice.length > 0) {
+            let min = props.filterPrice[0];
+            let max = props.filterPrice[1]
+            setValue([min, max])
+            console.log('value:', value)
+        }
+    }, [])
+
     const [value, setValue] = useState([5, 80]);
+
     const [maxRange, setMaxRange] = useState(false)
+
 
 
 
@@ -22,7 +36,9 @@ export default function RangeSlider() {
         } else {
             setMaxRange(false)
 
-        }
+        };
+
+        props.handleFilterPrice(value)
 
     };
 
