@@ -8,7 +8,8 @@ export default function handler(req, res) {
             'Content-Type': 'application/xml',
             'Accept-Encoding': 'gzip',
             'Accept-Language': 'fr',
-            "X-Requested-With": "XMLHttpRequest"
+            "X-Requested-With": "XMLHttpRequest",
+
         }
     };
     const searchParams = `imageCount.min=6&roadworthy=1&price.min=2000&accidentDamaged=0&classification=refdata/classes/Car&sort.field=modificationTime&sort.order=DESCENDING&page.number=1&page.size=100`;

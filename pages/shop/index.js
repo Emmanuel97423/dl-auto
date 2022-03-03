@@ -86,6 +86,7 @@ function Shop({ data, children }) {
         // console.log('posts:', posts)
 
         const res = await axios.post(`${process.env.API_BASE_URL}/api/vehicles/`, {
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
             page: pageState,
             // dateCheck: dateTimeDe
         }).then((response) => {
