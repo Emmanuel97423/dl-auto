@@ -1,6 +1,7 @@
 import { VehicleFactory } from '../Vehicles'
 export default class FilterPrice {
     constructor(data, request) {
+        // console.log('request:', request)
 
 
 

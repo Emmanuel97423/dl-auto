@@ -62,6 +62,7 @@ export default function filter(props) {
                 filterCondition={props.filterCondition}
                 handleCondition={props.handleCondition}
                 handleFilterPrice={props.handleFilterPrice}
+                filterPrice={props.filterPrice}
             />
 
         </Box>

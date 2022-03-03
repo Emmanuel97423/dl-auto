@@ -23,9 +23,10 @@ function Shop({ data, children }) {
     const [filterCondition, setFilterCondition] = useState();
     const [tagsCondition, setTagsCondition] = useState([]);
     const [filterPrice, setFilterPrice] = useState([]);
-
-
     const [filterResult, setFilterResult] = useState(false);
+    const [filterPriceResult, setFilterPriceResult] = useState([]);
+    console.log('filterPriceResult:', filterPriceResult)
+
 
     useEffect(function () {
 
@@ -44,8 +45,8 @@ function Shop({ data, children }) {
 
 
     const vehiclesList = data["search-result"]["ads"]["ad"];
-    const date = new Date(Date.now())
-    const dateTimeDe = formatInTimeZone(date, 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ssXXX').replace('+', '%2B').replace(' ', 'T')
+    // const date = new Date(Date.now())
+    // const dateTimeDe = formatInTimeZone(date, 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ssXXX').replace('+', '%2B').replace(' ', 'T')
     const [posts, setPosts] = useState(vehiclesList);
 
     // vehiclesList.map((vehicles) => {
@@ -60,7 +61,8 @@ function Shop({ data, children }) {
 
     const [hasMore, setHasMore] = useState(true);
     const [pageState, setPageState] = useState(1);
-    const [checkDate, setCheckDate] = useState(dateTimeDe);
+    console.log('pageState:', pageState)
+    // const [checkDate, setCheckDate] = useState(dateTimeDe);
 
     const handleCondition = (newCondition) => {
 
@@ -70,72 +72,61 @@ function Shop({ data, children }) {
         filter()
 
     };
-    const handleFilterPrice = (value) => {
-        console.log('posts:', posts)
-        console.log('pageState:', pageState)
+    const handleFilterPrice = async (value) => {
+
+
+        setFilterResult(true)
         // console.log('valuemin:', value[0] * 1000)
         // console.log('valuemax:', value[1] * 1000)
         setFilterPrice(value)
+        // dataFilter.getFilter
 
-        const dataFilter = new FilterPrice(posts, value);
-        dataFilter.getFilter
+        // setPosts(dataFilter.getFilter)
+        // // setPosts((post) => [...post, ...dataFilter.getFilter]);
+        // console.log('posts:', posts)
 
+        const res = await axios.post(`${process.env.API_BASE_URL}/api/vehicles/`, {
+            page: pageState,
+            // dateCheck: dateTimeDe
+        }).then((response) => {
 
-        setPosts(dataFilter.getFilter)
-        // setPosts((post) => [...post, ...dataFilter.getFilter]);
-        console.log('posts:', posts)
-        setFilterResult(true)
-
-
+            return response.data
+        });
+        const newPostsFilter = await res;
+        const newVehiculesFilter = newPostsFilter["search-result"]["ads"]["ad"];
+        // setPosts([...newVehiculesFilter]);
+        const dataFilter = new FilterPrice(newVehiculesFilter, value);
+        // setPosts(dataFilter.getFilter);
+        setFilterPriceResult(dataFilter.getFilter)
 
 
     }
 
     //Call API 
     const getMorePost = async () => {
-
-
         if (filterResult) {
-
-            setPageState(pageState + 3);
-
-            const res = axios.post(`${process.env.API_BASE_URL}/api/vehicles/`, {
-                page: pageState,
-                dateCheck: dateTimeDe
-            }).then((response) => {
-
-                return response.data
-            })
-            const newPostsFilter = await res;
-
-            const newVehiculesFilter = newPostsFilter["search-result"]["ads"]["ad"]
-            console.log('newVehiculesFilter:', newVehiculesFilter)
-
-            setPosts([])
-            setPosts(newVehiculesFilter);
-            console.log('posts:', posts)
-
+            console.log('Helle filtre more')
+            setPageState(pageState + 2);
+            console.log('pageState:', pageState)
             handleFilterPrice(filterPrice)
-
         } else {
+            console.log('Helle load MOre')
             setPageState(pageState + 3);
             const res = axios.post(`${process.env.API_BASE_URL}/api/vehicles/`, {
                 page: pageState,
-                dateCheck: dateTimeDe
+                // dateCheck: dateTimeDe
             }).then((response) => {
 
                 return response.data
             })
             const newPosts = await res;
             const newVehicules = newPosts["search-result"]["ads"]["ad"]
-            console.log('newVehicules:', newVehicules)
             setPosts((post) => [...post, ...newVehicules]);
-            console.log('posts:', posts)
+
         }
     };
     //Active filter
     const filter = () => {
-        console.log('filter method')
         const res = axios.post(`${process.env.API_BASE_URL}/api/vehicles/filter`, {
             filter: {
                 condition: tagsCondition
@@ -161,6 +152,7 @@ function Shop({ data, children }) {
                 filterCondition={filterCondition}
                 handleCondition={handleCondition}
                 handleFilterPrice={handleFilterPrice}
+                filterPrice={filterPrice}
 
             />
             <Divider color="#e0e0e0" />
@@ -171,7 +163,7 @@ function Shop({ data, children }) {
                     dataLength={posts.length}
                     next={getMorePost}
                     hasMore={hasMore}
-                    scrollThreshold={1}
+                    scrollThreshold={.8}
                     loader={
                         <Box sx={{
                             display: 'flex',
@@ -186,7 +178,39 @@ function Shop({ data, children }) {
                     }
                     endMessage={<h4>Il n'y a plus rien à montrer pour le moment...</h4>}
                 >
-                    <Box className={styles.box}>
+                    {filterResult ? <Box className={styles.box}>
+                        {
+                            filterPriceResult.map((vehicules, index) => {
+
+                                const vehicle = { ...vehicules }
+                                const vehicleClasse = new VehicleFactory(vehicle);
+
+                                const id = vehicleClasse.id;
+                                const marque = vehicleClasse.brand;
+                                const model = vehicleClasse.model;
+                                const price = vehicleClasse.price;
+                                const kilometrage = vehicleClasse.kilometrage;
+                                const carburant = vehicleClasse.carburant;
+                                const img = vehicleClasse.image;
+                                const priceTtc = vehicleClasse.getPriceTtc;
+                                const condition = vehicleClasse.condition
+                                return (<Box className={styles.cards} key={index} >
+                                    <CarCard
+                                        id={id}
+                                        marque={marque}
+                                        model={model}
+                                        price={priceTtc}
+                                        kilometrage={kilometrage}
+                                        carburant={carburant}
+                                        img={img}
+                                        condition={condition}
+                                    >
+                                    </CarCard>
+                                    {children}
+                                </Box>)
+                            })
+                        }
+                    </Box> : <Box className={styles.box}>
                         {
                             posts.map((vehicules, index) => {
 
@@ -218,7 +242,7 @@ function Shop({ data, children }) {
                                 </Box>)
                             })
                         }
-                    </Box>
+                    </Box>}
                 </InfiniteScroll>
             </Box>
         </Box>

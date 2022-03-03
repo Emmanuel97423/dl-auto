@@ -66,6 +66,7 @@ export default function drawerFilter(props) {
                         <Box>
                             <RangePriceSlider
                                 handleFilterPrice={props.handleFilterPrice}
+                                filterPrice={props.filterPrice}
                             />
                         </Box>
 
