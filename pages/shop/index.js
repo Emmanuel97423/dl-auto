@@ -163,7 +163,7 @@ function Shop({ data, children }) {
                     dataLength={posts.length}
                     next={getMorePost}
                     hasMore={hasMore}
-                    scrollThreshold={.8}
+                    scrollThreshold={.9}
                     loader={
                         <Box sx={{
                             display: 'flex',
