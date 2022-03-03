@@ -1,4 +1,4 @@
-import { Box, Drawer, Container, Typography } from '@mui/material';
+import { Box, Drawer, Container, Typography, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ToogleCondition from './toggleCondition';
 import RangePriceSlider from './filterByPriceSlider';
@@ -67,6 +67,7 @@ export default function drawerFilter(props) {
                             <RangePriceSlider
                                 handleFilterPrice={props.handleFilterPrice}
                                 filterPrice={props.filterPrice}
+                                setFilterPrice={props.setFilterPrice}
                             />
                         </Box>
 
@@ -77,6 +78,13 @@ export default function drawerFilter(props) {
                         <Typography variant="h6">Affinez votre recherche</Typography>
                         <SimpleAccordion />
                     </Box>
+
+                    <Button onClick={props.handleFilterPrice} sx={{
+                        borderRadius: '20px',
+                        width: 1,
+                        mt: 7,
+                    }} variant="contained">Filtrer</Button>
+
                 </Container>
 
             </Drawer>

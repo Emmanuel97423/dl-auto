@@ -25,7 +25,7 @@ function Shop({ data, children }) {
     const [filterPrice, setFilterPrice] = useState([]);
     const [filterResult, setFilterResult] = useState(false);
     const [filterPriceResult, setFilterPriceResult] = useState([]);
-    console.log('filterPriceResult:', filterPriceResult)
+
 
 
     useEffect(function () {
@@ -72,13 +72,13 @@ function Shop({ data, children }) {
         filter()
 
     };
-    const handleFilterPrice = async (value) => {
+    const handleFilterPrice = async () => {
 
 
         setFilterResult(true)
         // console.log('valuemin:', value[0] * 1000)
         // console.log('valuemax:', value[1] * 1000)
-        setFilterPrice(value)
+        setFilterPrice(filterPrice)
         // dataFilter.getFilter
 
         // setPosts(dataFilter.getFilter)
@@ -96,7 +96,8 @@ function Shop({ data, children }) {
         const newPostsFilter = await res;
         const newVehiculesFilter = newPostsFilter["search-result"]["ads"]["ad"];
         // setPosts([...newVehiculesFilter]);
-        const dataFilter = new FilterPrice(newVehiculesFilter, value);
+        const dataFilter = new FilterPrice(newVehiculesFilter, filterPrice);
+        console.log('filterPrice:', filterPrice)
         // setPosts(dataFilter.getFilter);
         setFilterPriceResult(dataFilter.getFilter)
 
@@ -154,6 +155,7 @@ function Shop({ data, children }) {
                 handleCondition={handleCondition}
                 handleFilterPrice={handleFilterPrice}
                 filterPrice={filterPrice}
+                setFilterPrice={setFilterPrice}
 
             />
             <Divider color="#e0e0e0" />

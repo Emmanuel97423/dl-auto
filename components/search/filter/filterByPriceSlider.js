@@ -8,7 +8,7 @@ function valuetext(value) {
 }
 
 export default function RangeSlider(props) {
-    console.log('props:', props.filterPrice[0]);
+    console.log('props:', props);
 
     useEffect(() => {
 
@@ -38,7 +38,8 @@ export default function RangeSlider(props) {
 
         };
 
-        props.handleFilterPrice(value)
+        // props.handleFilterPrice(value)
+        props.setFilterPrice(value)
 
     };
 
