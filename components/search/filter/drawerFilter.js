@@ -37,7 +37,7 @@ export default function drawerFilter(props) {
                         alignItems: 'center',
                         mb: 6,
                         mt: 1,
-                    }}><Typography variant='link'>Résultat du filtre</Typography><CloseIcon />
+                    }}><Typography variant='link'>Résultat du filtre</Typography><CloseIcon onClick={toggleDrawer()} />
                     </Box>
                     <Box
                         sx={{
